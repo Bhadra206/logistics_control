@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 //const logistics = require('')
+const  Vehicle = require('./schema/vehicleSchema')
 
 const app = express();
 
@@ -27,3 +28,24 @@ const port = 3000;
 app.listen(port, () => {
   console.log("Server Started successfully");
 });
+
+// const newVehicle = new Vehicle({
+//   name: "THAR",
+//   model: "2023",
+//   registrationNo: "KA01AB1235",
+//   purpose: "passenger",
+//   type: "LMV",
+//   ratePerKm: 10,
+// });
+
+// // 3. Save it
+// newVehicle
+//   .save()
+//   .then((doc) => {
+//     console.log("🚀 Vehicle saved:", doc);
+//     mongoose.connection.close(); // close connection after save
+//   })
+//   .catch((err) => {
+//     console.error("❌ Error saving vehicle:", err);
+//     mongoose.connection.close();
+//   });
