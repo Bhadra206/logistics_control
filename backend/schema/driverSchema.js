@@ -6,8 +6,18 @@ const driverSchema = new mongoose.Schema(
     mobile: { type: String, required: true },
     perDayRate: { type: Number, required: true },
     overTimeRate: { type: Number, required: true },
-    licence: { type: String, enum: ["LMV", "HMV", "Both"], default: "LMV" },
-    status: { type: String, enum: ["Active", "Inactive"], default: "Active" },
+    licence: {
+      type: String,
+      enum: ["LMV", "HMV", "Both"],
+      default: "LMV",
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["Active", "Inactive"],
+      default: "Active",
+      required: true,
+    },
   },
   { timestamps: true }
 );

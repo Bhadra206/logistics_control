@@ -9,10 +9,21 @@ const vehicleSchema = new mongoose.Schema(
       type: String,
       enum: ["passenger", "goods"],
       default: "passenger",
+      required: true,
     },
-    type: { type: String, enum: ["LMV", "HMV", "Both"], default: "LMV" },
+    type: {
+      type: String,
+      enum: ["LMV", "HMV", "Both"],
+      default: "LMV",
+      required: true,
+    },
     ratePerKm: { type: Number, required: true },
-    status: { type: String, enum: ["Active", "Inactive"], default: "Active" },
+    status: {
+      type: String,
+      enum: ["Active", "Inactive"],
+      default: "Active",
+      required: true,
+    },
   },
   { timestamps: true }
 );

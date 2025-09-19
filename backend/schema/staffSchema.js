@@ -6,12 +6,22 @@ const staffSchema = new mongoose.Schema(
     lastName: { type: String, required: true },
     email: { type: String, required: true },
     dob: { type: Date, required: true },
-    gender: { type: String, enum: ["Male", "Female", "Other"], default: "" },
+    gender: {
+      type: String,
+      enum: ["Male", "Female", "Other"],
+      default: "",
+      required: true,
+    },
     mobile: { type: String, required: true },
     address: { type: String, required: true },
     position: { type: String, required: true },
     password: { type: String, required: true },
-    type: { type: String, enum: ["admin", "staff"], default: "staff" },
+    type: {
+      type: String,
+      enum: ["admin", "staff"],
+      default: "staff",
+      required: true,
+    },
   },
   { timestamps: true }
 );

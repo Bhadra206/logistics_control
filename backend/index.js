@@ -1,15 +1,22 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-//const logistics = require('')
-const  Vehicle = require('./schema/vehicleSchema')
+const admin = require("./routes/Admin");
+const staff = require("./routes/Staff");
+const vehicle = require("./routes/vehicles");
+const driver = require("./routes/drivers");
+const order = require("./routes/orders");
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//app.use("/", logistics);
+app.use("/admin", admin);
+app.use("/staff", staff);
+app.use("/vehicle", vehicle);
+app.use("/driver", driver);
+app.use("/order", order);
 
 const connectDB = async () => {
   try {
@@ -28,24 +35,3 @@ const port = 3000;
 app.listen(port, () => {
   console.log("Server Started successfully");
 });
-
-// const newVehicle = new Vehicle({
-//   name: "THAR",
-//   model: "2023",
-//   registrationNo: "KA01AB1235",
-//   purpose: "passenger",
-//   type: "LMV",
-//   ratePerKm: 10,
-// });
-
-// // 3. Save it
-// newVehicle
-//   .save()
-//   .then((doc) => {
-//     console.log("🚀 Vehicle saved:", doc);
-//     mongoose.connection.close(); // close connection after save
-//   })
-//   .catch((err) => {
-//     console.error("❌ Error saving vehicle:", err);
-//     mongoose.connection.close();
-//   });

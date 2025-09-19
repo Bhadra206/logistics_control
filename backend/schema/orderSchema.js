@@ -26,7 +26,7 @@ const orderSchema = new mongoose.Schema(
     overtimeHours: { type: Number, required: false },
     status: {
       type: String,
-      enum: ["Completed", "In Progress", "Cancelled", "Pending"],
+      enum: ["Completed", "In Progress", "Cancelled", "Pending", "Allocated"],
       default: "Pending",
       required: false,
     },
