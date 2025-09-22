@@ -85,12 +85,10 @@ const updateOrder = async (id, updateData) => {
     "placeOfCustomer",
   ];
 
-  // Exclude driver/vehicle from this check
   const fieldsToCheck = Object.keys(updateData).filter(
     (field) => !["driver", "vehicle"].includes(field)
   );
 
-  // Trigger reset if any non-exception field is updated
   const shouldTrigger = fieldsToCheck.some(
     (field) => !exceptionFields.includes(field)
   );
@@ -108,7 +106,6 @@ const updateOrder = async (id, updateData) => {
     delete update.$set.vehicle;
   }
 
-  // Only assign driver if explicitly intended (separate endpoint or explicit field)
   if (updateData.driver) {
     const driverExists = await Driver.findById(updateData.driver);
     if (!driverExists) return { success: false, message: "Driver not found" };
@@ -121,7 +118,6 @@ const updateOrder = async (id, updateData) => {
     update.$set.vehicle = vehicleExists._id;
   }
 
-  // Set status = Allocated only if both are assigned in this update
   if (update.$set.driver && update.$set.vehicle) {
     update.$set.status = "Allocated";
     delete update.$unset.driver;
