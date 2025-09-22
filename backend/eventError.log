@@ -4,3 +4,6 @@
 {"level":"error","message":"Error retrieving orders","timestamp":"2025-09-22T09:39:51.894Z"}
 {"level":"error","message":"Error retrieving orders","timestamp":"2025-09-22T10:09:50.288Z"}
 {"level":"error","message":"Error retrieving orders","timestamp":"2025-09-22T10:10:36.807Z"}
+{"level":"error","message":"Error updating order","timestamp":"2025-09-22T10:29:11.304Z"}
+{"level":"error","message":"Error updating order","timestamp":"2025-09-22T10:31:26.662Z"}
+{"level":"error","message":"Error updating order","timestamp":"2025-09-22T10:35:21.919Z"}

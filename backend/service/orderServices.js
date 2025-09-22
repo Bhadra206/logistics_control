@@ -1,4 +1,7 @@
 const Order = require("../schema/orderSchema");
+const Driver = require("../schema/driverSchema");
+const Vehicle = require("../schema/vehicleSchema");
+const mongoose = require("mongoose");
 
 //Get Order
 const getOrders = async (startDate) => {
@@ -75,36 +78,57 @@ const updateOrder = async (id, updateData) => {
   const order = await Order.findById(id);
   if (!order) return { success: false, message: "Order not found" };
 
-  const exceptionFields = ["status", "remarks", "driver", "vehicle"];
-  const updatedFields = Object.keys(updateData);
+  const exceptionFields = [
+    "customerName",
+    "customerEmail",
+    "customerMobile",
+    "placeOfCustomer",
+  ];
 
-  const shouldTrigger = updatedFields.some(
+  // Exclude driver/vehicle from this check
+  const fieldsToCheck = Object.keys(updateData).filter(
+    (field) => !["driver", "vehicle"].includes(field)
+  );
+
+  // Trigger reset if any non-exception field is updated
+  const shouldTrigger = fieldsToCheck.some(
     (field) => !exceptionFields.includes(field)
   );
 
+  const update = { $set: {}, $unset: {} };
+  Object.assign(update.$set, updateData);
+
   if (shouldTrigger) {
-    updateData.status = "Pending";
-    updateData.driver = undefined;
-    updateData.vehicle = undefined;
+    update.$set.status = "Pending";
+    update.$set.TotalCost = 0; // reset cost
+    update.$unset.driver = ""; // clear previous assignment
+    update.$unset.vehicle = "";
+    // Remove driver/vehicle from $set if they came from PUT body
+    delete update.$set.driver;
+    delete update.$set.vehicle;
   }
 
+  // Only assign driver if explicitly intended (separate endpoint or explicit field)
   if (updateData.driver) {
     const driverExists = await Driver.findById(updateData.driver);
     if (!driverExists) return { success: false, message: "Driver not found" };
-    updateData.driver = driverExists._id;
+    update.$set.driver = driverExists._id;
   }
 
   if (updateData.vehicle) {
     const vehicleExists = await Vehicle.findById(updateData.vehicle);
     if (!vehicleExists) return { success: false, message: "Vehicle not found" };
-    updateData.vehicle = vehicleExists._id;
+    update.$set.vehicle = vehicleExists._id;
   }
 
-  if (updateData.driver && updateData.vehicle) {
-    updateData.status = "Allocated";
+  // Set status = Allocated only if both are assigned in this update
+  if (update.$set.driver && update.$set.vehicle) {
+    update.$set.status = "Allocated";
+    delete update.$unset.driver;
+    delete update.$unset.vehicle;
   }
 
-  const updatedOrder = await Order.findByIdAndUpdate(id, updateData, {
+  const updatedOrder = await Order.findByIdAndUpdate(id, update, {
     new: true,
   }).populate("driver vehicle");
 
