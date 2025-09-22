@@ -13,7 +13,7 @@ const updateDriver = async (driverId, updateData) => {
 const archiveDriver = async (driverId) => {
   return await Driver.findByIdAndUpdate(
     driverId,
-    { status: "archived" },
+    { status: "Inactive" },
     { new: true }
   );
 };
@@ -22,7 +22,7 @@ const archiveDriver = async (driverId) => {
 const restoreDriver = async (driverId) => {
   return await Driver.findByIdAndUpdate(
     driverId,
-    { status: "active" },
+    { status: "Active" },
     { new: true }
   );
 };

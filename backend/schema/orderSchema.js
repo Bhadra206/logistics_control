@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Types } = mongoose;
 
 const orderSchema = new mongoose.Schema(
   {
@@ -20,8 +21,8 @@ const orderSchema = new mongoose.Schema(
     numPassengers: { type: Number, required: false },
     weight: { type: Number, required: false },
     distance: { type: Number, required: true },
-    driver: { type: ObjectId, required: false },
-    vehicle: { type: ObjectId, required: false },
+    driver: { type: Types.ObjectId, ref: "Driver", required: false },
+    vehicle: { type: Types.ObjectId, ref: "Vehicle", required: false },
     TotalCost: { type: Number, required: false },
     overtimeHours: { type: Number, required: false },
     status: {

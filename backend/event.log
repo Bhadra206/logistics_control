@@ -1,0 +1,47 @@
+{"level":"info","message":"Vehicle added successfully","timestamp":"2025-09-22T08:46:19.130Z"}
+{"level":"info","message":"Vehicle added successfully","timestamp":"2025-09-22T08:47:27.787Z"}
+{"level":"info","message":"Vehicles retrieved successfully","timestamp":"2025-09-22T08:48:08.448Z"}
+{"level":"info","message":"Driver added successfully","timestamp":"2025-09-22T08:50:26.354Z"}
+{"level":"info","message":"Driver added successfully","timestamp":"2025-09-22T08:51:19.850Z"}
+{"level":"info","message":"Drivers retrieved successfully","timestamp":"2025-09-22T08:51:31.042Z"}
+{"level":"info","message":"Dashboard stats retrieved successfully","timestamp":"2025-09-22T08:51:47.482Z"}
+{"level":"info","message":"Staff added successfully","timestamp":"2025-09-22T09:01:25.652Z"}
+{"level":"info","message":"Staff added successfully","timestamp":"2025-09-22T09:01:31.800Z"}
+{"level":"info","message":"Drivers retrieved successfully","timestamp":"2025-09-22T09:04:11.723Z"}
+{"level":"info","message":"Driver 68d10dd2da7572c63049c5f2 updated successfully","timestamp":"2025-09-22T09:07:50.439Z"}
+{"level":"info","message":"Driver 68d10dd2da7572c63049c5f2 archived successfully","timestamp":"2025-09-22T09:08:29.248Z"}
+{"level":"info","message":"Driver 68d10dd2da7572c63049c5f2 restored successfully","timestamp":"2025-09-22T09:11:39.936Z"}
+{"level":"info","message":"Driver 68d10dd2da7572c63049c5f2 deleted successfully","timestamp":"2025-09-22T09:14:36.351Z"}
+{"level":"info","message":"Driver added successfully","timestamp":"2025-09-22T09:15:35.392Z"}
+{"level":"info","message":"Vehicles retrieved successfully","timestamp":"2025-09-22T09:16:15.446Z"}
+{"level":"info","message":"Vehicle 68d10cdbda7572c63049c5ea updated successfully","timestamp":"2025-09-22T09:23:21.051Z"}
+{"level":"info","message":"Vehicle 68d10cdbda7572c63049c5ea archived successfully","timestamp":"2025-09-22T09:26:13.589Z"}
+{"level":"info","message":"Vehicle 68d10cdbda7572c63049c5ea restored successfully","timestamp":"2025-09-22T09:26:22.654Z"}
+{"level":"info","message":"Vehicle 68d10cdbda7572c63049c5ea deleted successfully","timestamp":"2025-09-22T09:26:48.583Z"}
+{"level":"info","message":"Vehicle added successfully","timestamp":"2025-09-22T09:27:22.744Z"}
+{"level":"info","message":"Vehicles retrieved successfully","timestamp":"2025-09-22T09:35:48.060Z"}
+{"level":"info","message":"Drivers retrieved successfully","timestamp":"2025-09-22T09:36:12.711Z"}
+{"level":"info","message":"Order created Successfully","timestamp":"2025-09-22T09:38:12.208Z"}
+{"level":"info","message":"Drivers retrieved successfully","timestamp":"2025-09-22T09:38:55.934Z"}
+{"level":"info","message":"Vehicles retrieved successfully","timestamp":"2025-09-22T09:39:18.928Z"}
+{"level":"info","message":"Order created Successfully","timestamp":"2025-09-22T09:39:43.611Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T09:40:36.450Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T09:41:38.251Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T09:41:48.403Z"}
+{"level":"info","message":"Order updated successfully","timestamp":"2025-09-22T09:42:34.723Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T09:42:44.182Z"}
+{"level":"info","message":"Order updated successfully","timestamp":"2025-09-22T09:43:05.854Z"}
+{"level":"info","message":"Order deleted successfully","timestamp":"2025-09-22T09:43:12.692Z"}
+{"level":"info","message":"Order created Successfully","timestamp":"2025-09-22T09:43:37.667Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T09:45:20.787Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T09:45:53.080Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T09:49:48.327Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T09:50:01.561Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T09:57:49.571Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T09:58:28.802Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T09:58:39.019Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T10:00:05.880Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T10:02:36.367Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T10:03:43.727Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T10:06:01.295Z"}
+{"level":"info","message":"Orders retrieved Successfully","timestamp":"2025-09-22T10:11:32.368Z"}

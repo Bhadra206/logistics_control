@@ -1,4 +1,4 @@
-const adminServices = require("../service/adminServices");
+const vehicleServices = require("../service/vehicleServices");
 const { eventLogger } = require("./logger.js");
 
 // Update
@@ -7,7 +7,7 @@ const updateVehicle = async (req, res) => {
     const { id } = req.params;
     const updateData = req.body;
 
-    const vehicle = await adminServices.updateVehicle(id, updateData);
+    const vehicle = await vehicleServices.updateVehicle(id, updateData);
 
     if (!vehicle) {
       return res
@@ -19,6 +19,7 @@ const updateVehicle = async (req, res) => {
     res.status(200).json({ success: true, data: vehicle });
   } catch (err) {
     eventLogger.error("Error updating vehicle");
+    console.log(err);
     res.status(500).json({ success: false, message: "Error updating vehicle" });
   }
 };
@@ -28,7 +29,7 @@ const archiveVehicle = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const vehicle = await adminServices.archiveVehicle(id);
+    const vehicle = await vehicleServices.archiveVehicle(id);
 
     if (!vehicle) {
       return res
@@ -51,7 +52,7 @@ const restoreVehicle = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const vehicle = await adminServices.restoreVehicle(id);
+    const vehicle = await vehicleServices.restoreVehicle(id);
 
     if (!vehicle) {
       return res
@@ -74,7 +75,7 @@ const deleteVehicle = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const vehicle = await adminServices.deleteVehicle(id);
+    const vehicle = await vehicleServices.deleteVehicle(id);
 
     if (!vehicle) {
       return res

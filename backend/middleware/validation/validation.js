@@ -27,7 +27,7 @@ const staffValidation = [
   check("firstName").notEmpty().withMessage("First Name is required."),
   check("lastName").notEmpty().withMessage("Last Name is required."),
   check("email").notEmpty().withMessage("Email is required."),
-  check("dob").notEmpty.withMessage("Date of Birth is required."),
+  check("dob").notEmpty().withMessage("Date of Birth is required."),
   check("gender").notEmpty().withMessage("Gender is required."),
   check("mobile").notEmpty().withMessage("Mobile is required."),
   check("address").notEmpty().withMessage("Address is required."),

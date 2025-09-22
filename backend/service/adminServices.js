@@ -38,10 +38,11 @@ const getVehicles = async (status) => {
   }
 };
 
-const addVehicle = async (newVehicle) => {
+const addVehicle = async (vehicleData) => {
   try {
-    await newVehicle.save();
+    const newVehicle = await Vehicle(vehicleData);
     console.log("Vehicle added Successfully");
+    return await newVehicle.save();
   } catch (err) {
     console.error(err);
     throw err;
@@ -68,10 +69,11 @@ const getDrivers = async (status) => {
   }
 };
 
-const addDriver = async (newDriver) => {
+const addDriver = async (driverData) => {
   try {
-    await newDriver.save();
+    const newDriver = await Driver(driverData);
     console.log("Driver added Successfully");
+    return await newDriver.save();
   } catch (err) {
     console.error(err);
     throw err;
@@ -79,10 +81,11 @@ const addDriver = async (newDriver) => {
 };
 
 //Staff
-const addStaff = async (newStaff) => {
+const addStaff = async (staffData) => {
   try {
-    await newStaff.save();
+    newStaff = await Staff(staffData);
     console.log("Staff added Successfully");
+    return await newStaff.save();
   } catch (err) {
     console.error(err);
     throw err;

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const driverController = require("../controller/driverController");
+const driverController = require("../controllers/driverControllers");
 
 router.put("/:id", driverController.updateDriver);
 router.patch("/:id/archive", driverController.archiveDriver);

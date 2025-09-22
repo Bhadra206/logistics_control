@@ -13,7 +13,7 @@ const updateVehicle = async (vehicleId, updateData) => {
 const archiveVehicle = async (vehicleId) => {
   return await Vehicle.findByIdAndUpdate(
     vehicleId,
-    { status: "archived" },
+    { status: "Inactive" },
     { new: true }
   );
 };
@@ -22,7 +22,7 @@ const archiveVehicle = async (vehicleId) => {
 const restoreVehicle = async (vehicleId) => {
   return await Vehicle.findByIdAndUpdate(
     vehicleId,
-    { status: "active" },
+    { status: "Active" },
     { new: true }
   );
 };
