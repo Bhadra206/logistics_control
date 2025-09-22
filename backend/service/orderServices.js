@@ -73,10 +73,31 @@ const createOrder = async (orderData) => {
   return await order.save();
 };
 
-//Edit Order
-const updateOrder = async (id, updateData) => {
+// Edit full Document
+const replaceOrder = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const order = await Order.findById(id);
+    if (!order)
+      return res
+        .status(404)
+        .json({ success: false, message: "Order not found" });
+
+    const updatedOrder = await Order.findByIdAndUpdate(id, req.body, {
+      new: true,
+    }).populate("driver vehicle");
+
+    res.json({ success: true, data: updatedOrder });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+//Edit specific field
+const updateOrderPartial = async (id, updateData) => {
   const order = await Order.findById(id);
-  if (!order) return { success: false, message: "Order not found" };
+  if (!order) throw new Error("Order not found");
 
   const exceptionFields = [
     "customerName",
@@ -84,44 +105,35 @@ const updateOrder = async (id, updateData) => {
     "customerMobile",
     "placeOfCustomer",
   ];
-
-  // Exclude driver/vehicle from this check
   const fieldsToCheck = Object.keys(updateData).filter(
-    (field) => !["driver", "vehicle"].includes(field)
+    (f) => !["driver", "vehicle"].includes(f)
   );
-
-  // Trigger reset if any non-exception field is updated
-  const shouldTrigger = fieldsToCheck.some(
-    (field) => !exceptionFields.includes(field)
-  );
+  const shouldTrigger = fieldsToCheck.some((f) => !exceptionFields.includes(f));
 
   const update = { $set: {}, $unset: {} };
   Object.assign(update.$set, updateData);
 
   if (shouldTrigger) {
     update.$set.status = "Pending";
-    update.$set.TotalCost = 0; // reset cost
-    update.$unset.driver = ""; // clear previous assignment
+    update.$set.TotalCost = 0;
+    update.$unset.driver = "";
     update.$unset.vehicle = "";
-    // Remove driver/vehicle from $set if they came from PUT body
     delete update.$set.driver;
     delete update.$set.vehicle;
   }
 
-  // Only assign driver if explicitly intended (separate endpoint or explicit field)
   if (updateData.driver) {
     const driverExists = await Driver.findById(updateData.driver);
-    if (!driverExists) return { success: false, message: "Driver not found" };
+    if (!driverExists) throw new Error("Driver not found");
     update.$set.driver = driverExists._id;
   }
 
   if (updateData.vehicle) {
     const vehicleExists = await Vehicle.findById(updateData.vehicle);
-    if (!vehicleExists) return { success: false, message: "Vehicle not found" };
+    if (!vehicleExists) throw new Error("Vehicle not found");
     update.$set.vehicle = vehicleExists._id;
   }
 
-  // Set status = Allocated only if both are assigned in this update
   if (update.$set.driver && update.$set.vehicle) {
     update.$set.status = "Allocated";
     delete update.$unset.driver;
@@ -131,8 +143,7 @@ const updateOrder = async (id, updateData) => {
   const updatedOrder = await Order.findByIdAndUpdate(id, update, {
     new: true,
   }).populate("driver vehicle");
-
-  return { success: true, data: updatedOrder };
+  return updatedOrder;
 };
 
 //Delete Order
@@ -157,4 +168,10 @@ const deleteOrder = async (id) => {
   }
 };
 
-module.exports = { getOrders, createOrder, updateOrder, deleteOrder };
+module.exports = {
+  getOrders,
+  createOrder,
+  replaceOrder,
+  updateOrderPartial,
+  deleteOrder,
+};

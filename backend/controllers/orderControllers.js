@@ -29,15 +29,29 @@ const createOrder = async (req, res) => {
 };
 
 //Edit Order
-const updateOrder = async (req, res) => {
+const replaceOrder = async (req, res) => {
   try {
     const { id } = req.params;
     orderData = req.body;
-    const updatedOrder = await orderServices.updateOrder(id, orderData);
-    eventLogger.info("Order updated successfully");
+    const updatedOrder = await orderServices.replaceOrder(id, orderData);
+    eventLogger.info("Order has been fully updated");
     res.status(200).json({ success: true, data: updatedOrder });
   } catch (err) {
-    eventLogger.error("Error updating order");
+    eventLogger.error("Error updating the full order");
+    res.status(400).json({ success: false, message: err.message });
+  }
+};
+
+// Edit partial Order
+const updateOrderPartial = async (req, res) => {
+  try {
+    const { id } = req.params;
+    orderData = req.body;
+    const updatedOrder = await orderServices.updateOrderPartial(id, orderData);
+    eventLogger.info("Specific field of Order has been updated successfully");
+    res.status(200).json({ success: true, data: updatedOrder });
+  } catch (err) {
+    eventLogger.error("Error updating the partial order");
     res.status(400).json({ success: false, message: err.message });
   }
 };
@@ -61,4 +75,10 @@ const deleteOrder = async (req, res) => {
   }
 };
 
-module.exports = { getOrders, createOrder, updateOrder, deleteOrder };
+module.exports = {
+  getOrders,
+  createOrder,
+  replaceOrder,
+  updateOrderPartial,
+  deleteOrder,
+};
