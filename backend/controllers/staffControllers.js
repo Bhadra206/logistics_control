@@ -15,12 +15,12 @@ const getStaff = async (req, res) => {
 
 const updateStaff = async (req, res) => {
   try {
-    const id = req.params;
-    const updateData = req.baody;
+    const { id } = req.params;
+    const updateData = req.body;
     const staff = await staffServices.updateStaff(id, updateData);
     eventLogger.info("Successfully updated the staff");
     res.status(200).json({ success: true, data: staff });
-  } catch {
+  } catch (err) {
     console.log(err);
     eventLogger.error("Error updating the staff");
     res.status(500).json({ success: false, msg: "Error updating the staff" });
@@ -29,11 +29,11 @@ const updateStaff = async (req, res) => {
 
 const deleteStaff = async (req, res) => {
   try {
-    const id = req.params;
+    const { id } = req.params;
     await staffServices.deleteStaff(id);
     eventLogger.info(`Staff ${id} deleted successfully`);
     res.status(200).json({ success: true, message: "Driver Deleted" });
-  } catch {
+  } catch (err) {
     console.log(err);
     eventLogger.error("Error deleting the staff");
     res.status(500).json({ success: false, msg: "Error deleting the staff" });

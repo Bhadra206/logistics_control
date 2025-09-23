@@ -24,7 +24,7 @@ const updateStaff = async (staffId, updateData) => {
 
 const deleteStaff = async (staffId) => {
   try {
-    const staff = await Staff.findByIdAndDelete(sataffId);
+    const staff = await Staff.findByIdAndDelete(staffId);
     return staff;
   } catch (err) {
     console.log(err);

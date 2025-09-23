@@ -10,3 +10,7 @@
 {"level":"error","message":"Error updating the partial order","timestamp":"2025-09-22T11:59:13.068Z"}
 {"level":"error","message":"Error updating the partial order","timestamp":"2025-09-22T11:59:58.567Z"}
 {"level":"error","message":"Error updating the partial order","timestamp":"2025-09-22T12:01:41.827Z"}
+{"level":"error","message":"Error updating the staff","timestamp":"2025-09-23T11:47:19.563Z"}
+{"level":"error","message":"Error updating the staff","timestamp":"2025-09-23T11:47:52.356Z"}
+{"level":"error","message":"Error deleting the staff","timestamp":"2025-09-23T11:51:13.642Z"}
+{"level":"error","message":"Error deleting the staff","timestamp":"2025-09-23T11:51:25.430Z"}
