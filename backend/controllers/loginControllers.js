@@ -2,9 +2,8 @@ const { loginStaff } = require("../service/loginServices");
 const { eventLogger } = require("./logger");
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
-
   try {
+    const { email, password } = req.body;
     const data = await loginStaff(email, password);
     eventLogger.info("Login Successful");
     res.json({ message: "Login successful", ...data });
