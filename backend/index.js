@@ -6,6 +6,7 @@ const order = require("./routes/Order");
 const vehicle = require("./routes/Vehicles");
 const driver = require("./routes/Drivers");
 const login = require("./routes/Login");
+const staff = require("./routes/Staff");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use("/order", order);
 app.use("/vehicle", vehicle);
 app.use("/driver", driver);
 app.use("/", login);
+app.use("/staff", staff);
 
 const connectDB = async () => {
   try {

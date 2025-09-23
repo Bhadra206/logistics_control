@@ -1,7 +1,6 @@
 const Order = require("../schema/orderSchema");
 const Driver = require("../schema/driverSchema");
 const Vehicle = require("../schema/vehicleSchema");
-const mongoose = require("mongoose");
 
 //Get Order
 const getOrders = async (startDate) => {
@@ -10,11 +9,6 @@ const getOrders = async (startDate) => {
 
     const startOfDay = new Date(date.setHours(0, 0, 0, 0));
     const endOfDay = new Date(date.setHours(23, 59, 59, 999));
-
-    // const orders = await Order.find({
-    //   startDate: { $gte: startOfDay, $lte: endOfDay },
-    // });
-    // console.log("Orders found:", orders);
 
     const orders = await Order.aggregate([
       {
