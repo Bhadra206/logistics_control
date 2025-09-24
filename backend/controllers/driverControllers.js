@@ -19,7 +19,7 @@ const updateDriver = async (req, res) => {
     res.status(200).json({ success: true, data: driver });
   } catch (err) {
     eventLogger.error("Error updating driver");
-    res.status(500).json({ success: false, message: "Error updating driver" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -40,7 +40,7 @@ const archiveDriver = async (req, res) => {
     res.status(200).json({ success: true, data: driver });
   } catch (err) {
     eventLogger.error("Error archiving driver");
-    res.status(500).json({ success: false, message: "Error archiving driver" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -61,7 +61,7 @@ const restoreDriver = async (req, res) => {
     res.status(200).json({ success: true, data: driver });
   } catch (err) {
     eventLogger.error("Error restoring driver");
-    res.status(500).json({ success: false, message: "Error restoring driver" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -82,7 +82,7 @@ const deleteDriver = async (req, res) => {
     res.status(200).json({ success: true, message: "Driver deleted" });
   } catch (err) {
     eventLogger.error("Error deleting driver");
-    res.status(500).json({ success: false, message: "Error deleting driver" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 

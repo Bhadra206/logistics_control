@@ -15,6 +15,31 @@ const getOrders = async (req, res) => {
   }
 };
 
+//Get all Order
+const getAllOrders = async (req, res) => {
+  try {
+    const order = await orderServices.getAllOrders();
+    eventLogger.info("All Orders retrieved Successfully");
+    res.status(201).json({ success: true, data: order });
+  } catch (err) {
+    eventLogger.error("Error fetching all Order");
+    res.status(400).json({ success: false, message: err.message });
+  }
+};
+
+//Get Order by id or name
+const getOrderByIdOrName = async (req, res) => {
+  try {
+    const { id, name } = req.query;
+    const order = await orderServices.getOrderByIdOrName({id, name});
+    eventLogger.info("Successfully retrieved Orders by name or id ");
+    res.status(201).json({ success: true, data: order });
+  } catch (err) {
+    eventLogger.error("Failed to retrieved Orders by name or id ");
+    res.status(400).json({ success: false, message: err.message });
+  }
+};
+
 // Create Order
 const createOrder = async (req, res) => {
   try {
@@ -77,6 +102,8 @@ const deleteOrder = async (req, res) => {
 
 module.exports = {
   getOrders,
+  getAllOrders,
+  getOrderByIdOrName,
   createOrder,
   replaceOrder,
   updateOrderPartial,

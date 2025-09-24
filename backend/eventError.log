@@ -14,3 +14,15 @@
 {"level":"error","message":"Error updating the staff","timestamp":"2025-09-23T11:47:52.356Z"}
 {"level":"error","message":"Error deleting the staff","timestamp":"2025-09-23T11:51:13.642Z"}
 {"level":"error","message":"Error deleting the staff","timestamp":"2025-09-23T11:51:25.430Z"}
+{"level":"error","message":"Error adding staff","timestamp":"2025-09-24T06:08:59.048Z"}
+{"level":"error","message":"Error adding staff","timestamp":"2025-09-24T06:09:50.560Z"}
+{"level":"error","message":"Error adding staff","timestamp":"2025-09-24T06:11:47.768Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-09-24T06:44:55.221Z"}
+{"level":"error","message":"Error deleting order","timestamp":"2025-09-24T07:01:07.359Z"}
+{"level":"error","message":"Error creating Order","timestamp":"2025-09-24T07:04:55.514Z"}
+{"level":"error","message":"Error creating Order","timestamp":"2025-09-24T08:15:07.629Z"}
+{"level":"error","message":"Error creating Order","timestamp":"2025-09-24T08:15:34.416Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-09-24T08:22:47.862Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-09-24T08:23:10.594Z"}
+{"level":"error","message":"Failed to retrieved Orders by name or id ","timestamp":"2025-09-24T09:40:07.412Z"}
+{"level":"error","message":"Failed to retrieved Orders by name or id ","timestamp":"2025-09-24T09:41:04.414Z"}

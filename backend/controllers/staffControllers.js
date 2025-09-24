@@ -9,7 +9,7 @@ const getStaff = async (req, res) => {
   } catch (err) {
     console.log(err);
     eventLogger.error("Error retrieving the staff");
-    res.status(500).json({ success: false, msg: "Error fetching the staff" });
+    res.status(500).json({ success: false, msg: err.message });
   }
 };
 
@@ -23,7 +23,7 @@ const updateStaff = async (req, res) => {
   } catch (err) {
     console.log(err);
     eventLogger.error("Error updating the staff");
-    res.status(500).json({ success: false, msg: "Error updating the staff" });
+    res.status(500).json({ success: false, msg: err.message });
   }
 };
 
@@ -36,7 +36,7 @@ const deleteStaff = async (req, res) => {
   } catch (err) {
     console.log(err);
     eventLogger.error("Error deleting the staff");
-    res.status(500).json({ success: false, msg: "Error deleting the staff" });
+    res.status(500).json({ success: false, msg: err.message });
   }
 };
 

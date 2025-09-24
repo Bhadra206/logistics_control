@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema(
     dropLoc: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    numberOfDays: { type: Number, required: true },
+    numberOfDays: { type: Number, required: false },
     typeOfService: {
       type: String,
       enum: ["passenger", "goods"],

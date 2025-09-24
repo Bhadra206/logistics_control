@@ -3,7 +3,7 @@ const router = express.Router();
 const staffController = require("../controllers/staffControllers");
 
 router.get("/getStaff", staffController.getStaff);
-router.put("/:id", staffController.updateStaff);
-router.delete("/:id", staffController.deleteStaff);
+router.put("/updateStaff/:id", staffController.updateStaff);
+router.delete("/deleteStaff/:id", staffController.deleteStaff);
 
 module.exports = router;

@@ -20,7 +20,7 @@ const updateVehicle = async (req, res) => {
   } catch (err) {
     eventLogger.error("Error updating vehicle");
     console.log(err);
-    res.status(500).json({ success: false, message: "Error updating vehicle" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -41,9 +41,7 @@ const archiveVehicle = async (req, res) => {
     res.status(200).json({ success: true, data: vehicle });
   } catch (err) {
     eventLogger.error("Error archiving vehicle");
-    res
-      .status(500)
-      .json({ success: false, message: "Error archiving vehicle" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -64,9 +62,7 @@ const restoreVehicle = async (req, res) => {
     res.status(200).json({ success: true, data: vehicle });
   } catch (err) {
     eventLogger.error("Error restoring vehicle");
-    res
-      .status(500)
-      .json({ success: false, message: "Error restoring vehicle" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -87,7 +83,7 @@ const deleteVehicle = async (req, res) => {
     res.status(200).json({ success: true, message: "Vehicle deleted" });
   } catch (err) {
     eventLogger.error("Error deleting vehicle");
-    res.status(500).json({ success: false, message: "Error deleting vehicle" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 

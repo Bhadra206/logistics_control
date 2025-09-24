@@ -9,7 +9,7 @@ const getDashBoardStats = async (req, res) => {
     res.status(200).json({ success: true, data: stats });
   } catch (err) {
     eventLogger.error("Error retrieving dashboard stats");
-    res.status(500).json({ success: false, message: "Error fetching stats" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -22,9 +22,7 @@ const getVehicles = async (req, res) => {
     res.status(200).json({ success: true, data: vehicles });
   } catch (err) {
     eventLogger.error("Error retrieving vehicles");
-    res
-      .status(500)
-      .json({ success: false, message: "Error fetching vehicles" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -36,7 +34,7 @@ const addVehicle = async (req, res) => {
     res.status(201).json({ success: true, data: vehicle });
   } catch (err) {
     eventLogger.error("Error adding vehicle");
-    res.status(500).json({ success: false, message: "Error adding vehicle" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -49,7 +47,7 @@ const getDrivers = async (req, res) => {
     res.status(200).json({ success: true, data: drivers });
   } catch (err) {
     eventLogger.error("Error retrieving drivers");
-    res.status(500).json({ success: false, message: "Error fetching drivers" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -61,7 +59,7 @@ const addDriver = async (req, res) => {
     res.status(201).json({ success: true, data: driver });
   } catch (err) {
     eventLogger.error("Error adding driver");
-    res.status(500).json({ success: false, message: "Error adding driver" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -74,7 +72,7 @@ const addStaff = async (req, res) => {
     res.status(201).json({ success: true, data: staff });
   } catch (err) {
     eventLogger.error("Error adding staff");
-    res.status(500).json({ success: false, message: "Error adding staff" });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
