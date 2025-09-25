@@ -1,0 +1,24 @@
+//import { useState } from "react";
+import { Link } from "react-router-dom";
+import "./AdminNav.css";
+
+function AdminNav() {
+  //   const [token, setToken] = useState(localStorage.getItem("token"));
+  //   function handleLogout() {
+  //     setToken(null);
+  //     localStorage.removeItem("token");
+  //   }
+  return (
+    <div className="admin-nav">
+      <div className="admin-left">
+        <h1>Logistics Control App</h1>
+      </div>
+      <div className="admin-right">
+        <Link to="/">DashBoard</Link>
+        <button>Logout</button>
+      </div>
+    </div>
+  );
+}
+
+export default AdminNav;

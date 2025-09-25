@@ -1,0 +1,28 @@
+.admin-nav {
+  background-color: black;
+  width: 100%;
+  height: 100px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-left h1 {
+  padding: 20px;
+}
+
+.admin-right {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+}
+
+.admin-right a {
+  text-decoration: none;
+  color: white;
+}
+
+.admin-right a:hover{
+    color: rgb(180, 179, 179);
+}

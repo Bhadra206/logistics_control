@@ -1,7 +1,5 @@
-function staffDashBoard() {
-  return <div>
-    
-  </div>;
+function StaffDashBoard() {
+  return <div></div>;
 }
 
-export default staffDashBoard;
+export default StaffDashBoard;
