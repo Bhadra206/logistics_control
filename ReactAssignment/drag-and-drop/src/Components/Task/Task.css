@@ -1,0 +1,17 @@
+.task {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgb(0, 0, 0, 0.2);
+  width: 96%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  touch-action: none;
+}
+
+.check-box {
+  height: 20px;
+  width: 20px;
+}

@@ -1,0 +1,116 @@
+.contact {
+  margin: 0;
+  background-image: url("./src/assets/Dance1.png");
+  height: 88vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-heading {
+  font-family: "Bagel Fat One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.contact-container {
+  background-color: white;
+  margin: 0;
+  padding: 10px;
+  height: 400px;
+  width: 400px;
+  box-shadow: 0 4px 6px rgb(0, 0, 0, 0.3);
+  border-radius: 20px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  margin-top: 20px;
+}
+
+.matter {
+  height: 80px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid #e3e3e3;
+  padding: 10px 20px;
+  outline: none;
+  font-size: 16px;
+  color: #393e46;
+}
+
+.name,
+.email {
+  height: 40px;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #e3e3e3;
+  padding: 10px 20px;
+  outline: none;
+  font-size: 16px;
+  color: #393e46;
+}
+
+.btn{
+  display: block;
+  align-items: center;
+}
+
+.submit-btn {
+  height: 40px;
+  width: 100px;
+  background-color: rgb(98, 198, 255);
+  border: none;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.submit-btn:hover {
+  background-color: rgb(71, 177, 238);
+}
+
+@media (max-width: 600px) {
+  .contact-heading {
+    font-size: 24px;
+  }
+
+  .contact-container {
+    width: 70%;
+    padding: 15px;
+  }
+
+  .name,
+  .email,
+  .matter {
+    font-size: 14px;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+    height: 45px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .contact-heading {
+    font-size: 28px;
+  }
+
+  .contact-container {
+    width: 70%;
+  }
+}

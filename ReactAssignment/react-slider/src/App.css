@@ -1,0 +1,70 @@
+body {
+  background-color: rgb(29, 29, 29);
+  overflow-y: hidden;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px; /* keep carousel bounded */
+  margin: auto;
+}
+
+.slick-slide {
+  display: flex !important; /* keeps cards centered */
+  justify-content: center;
+  padding: 10px; /* spacing between slides */
+}
+
+.card-container {
+  background-color: white;
+  height: 320px;
+  color: black;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.image-container {
+  background-color: rgb(84, 86, 214);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.name {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.review{
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.card-button {
+  background-color: rgb(84, 86, 214);
+  border-radius: 8px;
+  color: white;
+  height: 30px;
+  border: none;
+}

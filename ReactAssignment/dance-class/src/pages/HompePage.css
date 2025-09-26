@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  width: 0;
+  overflow-x: hidden;
+}
+
+.background {
+  margin: 0;
+  height: 88vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  background-image: url("./src/assets/Dance7.jpg");
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.right {
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-heading {
+  font-family: "Bagel Fat One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  padding-bottom: 50px;
+  font-size: 60px;
+  text-shadow: 4px 4px 4px #888888;
+}
+
+.text-box {
+  text-align: center;
+  font-size: 40px;
+  color: rgb(63, 63, 63);
+}
+
+.text-box1 {
+  text-align: center;
+  font-family: "PT Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 28px;
+  color: rgb(94, 92, 92);
+}
+
+.join-btn {
+  height: 40px;
+  width: 100px;
+  background-color: rgb(49, 167, 240);
+  border: none;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .background {
+    height: auto;
+    padding: 40px 20px;
+    flex-direction: column;
+  }
+
+  .right {
+    padding-right: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .home-heading {
+    font-size: 32px;
+    padding-bottom: 20px;
+  }
+
+  .text-box {
+    font-size: 22px;
+  }
+
+  .text-box1 {
+    font-size: 16px;
+  }
+
+  .join-btn {
+    width: 100px;
+    height: 40px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .home-heading {
+    font-size: 45px;
+  }
+
+  .text-box {
+    font-size: 30px;
+  }
+
+  .text-box1 {
+    font-size: 20px;
+  }
+
+  .right {
+    padding-right: 40px;
+  }
+}

@@ -1,0 +1,82 @@
+.employee-heading {
+  text-align: center;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px;
+}
+
+.top-button{
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-btn {
+  width: 120px;
+  height: 30px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 15px;
+}
+
+.add-btn:hover{
+  background-color: #004a99;
+}
+
+.logout-btn {
+  width: 100px;
+  height: 30px;
+  color: white;
+  background-color: rgb(243, 65, 52);
+  border: none;
+  border-radius: 15px;
+}
+
+.logout-btn:hover{
+  background-color: rgb(177, 40, 31);
+}
+
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  flex: 1 1 calc(33.33% - 20px);
+  max-width: 250px;
+}
+
+.bottom-btn {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.next {
+  background-color: #37ac50;
+}
+
+.next:hover{
+    background-color: #1a752e;
+}
+
+.prev {
+  background-color: rgb(255, 217, 0);
+}
+
+.prev:hover{
+  background-color: rgb(170, 145, 0);
+}
+
+.next,
+.prev {
+  height: 30px;
+  border: none;
+  border-radius: 15px;
+}

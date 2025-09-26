@@ -1,0 +1,97 @@
+.card {
+  width: 250px;
+  height: 330px;
+  border: 1px solid #ccc;
+  perspective: 1000px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgb(0, 0, 0, 0.4);
+}
+
+.card-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+}
+
+.card-container.flipped {
+  transform: rotateY(180deg);
+}
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.card-front {
+  background: #f8f9fa;
+}
+
+.card-back {
+  background: #e9ecef;
+  transform: rotateY(180deg);
+}
+
+.card-image {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* makes the image fit the circle */
+}
+
+.info {
+  font-size: 12px;
+}
+
+.emp-title {
+  text-align: center;
+}
+
+.edit-btn,
+.delete-btn {
+  margin-right: 5px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #01448b;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #911925;
+}
