@@ -1,0 +1,175 @@
+.driver-card {
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  transition: box-shadow 0.3s;
+  margin: 10px;
+}
+
+.driver-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.status-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.status-line.active {
+  background: #10b981;
+}
+.status-line.inactive {
+  background: #9ca3af;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 16px;
+}
+
+.driver-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #6b7280, #8b5cf6);
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.driver-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #111827;
+}
+
+.licence {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid;
+}
+
+.licence.hmv {
+  background: #f3e8ff;
+  color: #6b21a8;
+  border-color: #ddd6fe;
+}
+.licence.lmv {
+  background: #dbeafe;
+  color: #1e3a8a;
+  border-color: #bfdbfe;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.active {
+  background: #d1fae5;
+  color: #065f46;
+}
+.status-badge.inactive {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.card-details {
+  margin-bottom: 16px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #4b5563;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+.icon.green {
+  color: #10b981;
+}
+.icon.orange {
+  color: #f97316;
+}
+
+.label {
+  font-size: 10px;
+  color: #6b7280;
+}
+.value {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.rate-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1;
+  padding: 6px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 14px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn.edit {
+  color: #3b82f6;
+  border-color: #3b82f6;
+}
+.btn.archive {
+  color: #374151;
+  border-color: #9ca3af;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+}

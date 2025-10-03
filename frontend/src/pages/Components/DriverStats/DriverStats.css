@@ -1,0 +1,79 @@
+.driverstats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.driverstats-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  transition: transform 0.2s;
+}
+
+.driverstats-card:hover {
+  transform: translateY(-3px);
+}
+
+.driverstats-cardcontent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.driverstats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.driverstats-title {
+  font-size: 0.9rem;
+  color: #7c7c7c;
+}
+
+.driverstats-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  margin-top: 4px;
+}
+
+.driverstats-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.driverstats-icon {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+}
+
+/* Colors */
+.driverstats-icon-wrapper.blue,
+.driverstats-bar.blue {
+  background-color: #2196f3;
+}
+.driverstats-icon-wrapper.green,
+.driverstats-bar.green {
+  background-color: #4caf50;
+}
+.driverstats-icon-wrapper.purple,
+.driverstats-bar.purple {
+  background-color: #9c27b0;
+}
+.driverstats-icon-wrapper.orange,
+.driverstats-bar.orange {
+  background-color: #ff9800;
+}
+
+.driverstats-bar {
+  height: 4px;
+  border-radius: 2px;
+}

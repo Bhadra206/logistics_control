@@ -18,7 +18,6 @@ function AdminDashBoard() {
       try {
         const res = await fetch("http://localhost:3000/admin/stats");
         const data = await res.json();
-        console.log(data);
         if (res.ok) {
           setStats(data.data);
         } else {
@@ -56,11 +55,11 @@ function AdminDashBoard() {
         <div>
           <h2 className="section-title">Quick Links</h2>
           <div className="section-buttons">
-            <button onClick={() => navigate("/addVehicle")} className="buttons">
-              Add Vehicle
-            </button>
             <button onClick={() => navigate("/addDriver")} className="buttons">
               Add Driver
+            </button>
+            <button onClick={() => navigate("/addVehicle")} className="buttons">
+              Add Vehicle
             </button>
             <button onClick={() => navigate("/addStaff")} className="buttons">
               Add Staff
@@ -70,11 +69,11 @@ function AdminDashBoard() {
         <div className="section-title">
           <h2>Pages</h2>
           <div className="section-buttons">
-            <button onClick={() => navigate("/vehicle")} className="buttons">
-              Vehicle
-            </button>
             <button onClick={() => navigate("/driver")} className="buttons">
               Driver
+            </button>
+            <button onClick={() => navigate("/vehicle")} className="buttons">
+              Vehicle
             </button>
             <button onClick={() => navigate("/staff")} className="buttons">
               Staff
