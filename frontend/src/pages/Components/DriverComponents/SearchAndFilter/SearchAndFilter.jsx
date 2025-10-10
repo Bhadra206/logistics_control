@@ -39,7 +39,7 @@ export function SearchAndFilters({
           >
             <option value="all">All Status</option>
             <option value="Active">Active</option>
-            <option value="Archived">Archived</option>
+            <option value="Inactive">Archived</option>
           </select>
 
           {/* licence */}

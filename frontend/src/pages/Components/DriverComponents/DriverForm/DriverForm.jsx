@@ -72,15 +72,15 @@ export function DriverForm({ driver, onSave, onCancel }) {
     e.preventDefault();
     if (!validateForm()) return;
 
-  const driverData = {
-  ...(driver && { id: driver.id }),
-  name: formData.name.trim(),
-  mobile: formData.mobile,
-  perDayRate: Number(formData.perDayRate),
-  overTimeRate: Number(formData.overTimeRate), 
-  licence: formData.licence,
-  status: formData.status === "Archived" ? "Inactive" : formData.status,
-};
+    const driverData = {
+      ...(driver && { _id: driver._id }),
+      name: formData.name.trim(),
+      mobile: formData.mobile,
+      perDayRate: Number(formData.perDayRate),
+      overTimeRate: Number(formData.overTimeRate),
+      licence: formData.licence,
+      status: formData.status === "Archived" ? "Inactive" : formData.status,
+    };
 
     onSave(driverData);
   };
@@ -114,7 +114,7 @@ export function DriverForm({ driver, onSave, onCancel }) {
           {/* Personal Info */}
           <section>
             <h3>
-              <User size={18} /> Personal Information
+              <User size={18} color="blue"/> Personal Information
             </h3>
             <div className="form-grid">
               <div className="form-group">
@@ -141,9 +141,7 @@ export function DriverForm({ driver, onSave, onCancel }) {
                   onChange={(e) => handleInputChange("mobile", e.target.value)}
                   placeholder="Enter 10-digit mobile number"
                 />
-                {errors.mobile && (
-                  <p className="error">{errors.mobile}</p>
-                )}
+                {errors.mobile && <p className="error">{errors.mobile}</p>}
               </div>
             </div>
           </section>
@@ -151,7 +149,7 @@ export function DriverForm({ driver, onSave, onCancel }) {
           {/* Rate Info */}
           <section>
             <h3>
-              <IndianRupee size={18} /> Rate Information
+              <IndianRupee size={18} color="green" /> Rate Information
             </h3>
             <div className="form-grid">
               <div className="form-group">
@@ -193,7 +191,7 @@ export function DriverForm({ driver, onSave, onCancel }) {
           {/* licence & Status */}
           <section>
             <h3>
-              <Car size={18} /> licence & Status
+              <Car size={18} color="purple"/> licence & Status
             </h3>
             <div className="form-grid">
               <div className="form-group">

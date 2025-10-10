@@ -4,13 +4,13 @@ import { DriverStats } from "../DriverStats/DriverStats";
 import { SearchAndFilters } from "../SearchAndFilter/SearchAndFilter";
 import { DriverCard } from "../DriverCard/DriverCard";
 import { DriverListTable } from "../DriverListTable/DriverListTable";
-import { DriverDetails } from "../DriverDetails/DriverDetails";
 import "./DriverList.css";
 
 export function DriverList({
   drivers,
   onEditDriver,
   onToggleArchive,
+  onDeleteDriver,
   onAddDriver,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,17 +19,9 @@ export function DriverList({
   const [sortBy, setSortBy] = useState("name");
   const [viewMode, setViewMode] = useState("grid");
 
-  const [selectedDriver, setSelectedDriver] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const openDriverModal = (driver) => {
     setSelectedDriver(driver);
     setIsModalOpen(true);
-  };
-
-  const closeDriverModal = () => {
-    setSelectedDriver(null);
-    setIsModalOpen(false);
   };
 
   const filteredAndSortedDrivers = useMemo(() => {
@@ -139,6 +131,7 @@ export function DriverList({
                 driver={driver}
                 onEdit={onEditDriver}
                 onToggleArchive={onToggleArchive}
+                onDeleteDriver={onDeleteDriver}
                 onClick={() => openDriverModal(driver)}
               />
             ))}
@@ -148,16 +141,11 @@ export function DriverList({
             drivers={filteredAndSortedDrivers}
             onEditDriver={onEditDriver}
             onToggleArchive={onToggleArchive}
+            onDeleteDriver={onDeleteDriver}
             onRowClick={openDriverModal}
           />
         )}
       </div>
-
-      <DriverDetails
-        driver={selectedDriver}
-        isOpen={isModalOpen}
-        onClose={closeDriverModal}
-      />
     </div>
   );
 }

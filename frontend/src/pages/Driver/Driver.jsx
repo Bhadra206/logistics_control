@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { DriverList } from "../Components/DriverList/DriverList";
-import { DriverForm } from "../Components/DriverForm/DriverForm";
+import { DriverList } from "../Components/DriverComponents/DriverList/DriverList";
+import { DriverForm } from "../Components/DriverComponents/DriverForm/DriverForm";
 
 function Driver() {
   const [drivers, setDrivers] = useState([]);
@@ -40,9 +40,9 @@ function Driver() {
 
   const handleSaveDriver = async (driverData) => {
     try {
-      if (driverData.id) {
+      if (driverData._id) {
         await fetch(
-          `http://localhost:3000/driver/updateDriver/${driverData.id}`,
+          `http://localhost:3000/driver/updateDriver/${driverData._id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -76,25 +76,31 @@ function Driver() {
   const handleDeleteDriver = async (id) => {
     if (!window.confirm("Are you sure you want to delete this driver?")) return;
     try {
-      await fetch(`http://localhost:3000/driver/deleteDriver/${driverData.id}`);
+      await fetch(`http://localhost:3000/driver/deleteDriver/${id}`, {
+        method: "DELETE",
+      });
       fetchDrivers();
     } catch (err) {
       console.error("Error deleting driver:", err);
     }
   };
 
-  const handleToggleArchive = async (id) => {
+  const handleToggleArchive = async (driver) => {
     try {
-      await fetch(`http://localhost:3000/driver/${driverData.id}/archive`);
+      if (driver.status === "Active") {
+        await fetch(`http://localhost:3000/driver/${driver._id}/archive`, {
+          method: "PATCH",
+        });
+      } else {
+        await fetch(`http://localhost:3000/driver/${driver._id}/restore`, {
+          method: "PATCH",
+        });
+      }
+
       fetchDrivers();
     } catch (err) {
-      console.error("Error toggling archive:", err);
+      console.error("Error toggling archive/restore:", err);
     }
-  };
-
-  const handleViewDriver = (driver) => {
-    setSelectedDriver(driver);
-    setCurrentView("detail");
   };
 
   const handleCancel = () => {
@@ -110,7 +116,6 @@ function Driver() {
           onEditDriver={handleEditDriver}
           onToggleArchive={handleToggleArchive}
           onDeleteDriver={handleDeleteDriver}
-          onViewDriver={handleViewDriver}
           onAddDriver={handleAddDriver}
         />
       )}
@@ -120,9 +125,6 @@ function Driver() {
           onSave={handleSaveDriver}
           onCancel={handleCancel}
         />
-      )}
-      {currentView === "details" && selectedDriver && (
-        <DriverDetails driver={selectedDriver} onBack={handleCancel} />
       )}
     </div>
   );

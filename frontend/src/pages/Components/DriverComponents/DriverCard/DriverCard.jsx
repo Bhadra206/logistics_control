@@ -1,8 +1,21 @@
 import React from "react";
-import { Edit, Archive, ArchiveRestore, Phone, Clock, IndianRupee } from "lucide-react";
+import {
+  Edit,
+  Archive,
+  ArchiveRestore,
+  Phone,
+  Clock,
+  IndianRupee,
+  Trash2,
+} from "lucide-react"; // added Trash2 icon
 import "./DriverCard.css";
 
-export function DriverCard({ driver, onEdit, onToggleArchive }) {
+export function DriverCard({
+  driver,
+  onEdit,
+  onToggleArchive,
+  onDeleteDriver,
+}) {
   const getInitials = (name) =>
     name
       .split(" ")
@@ -13,7 +26,11 @@ export function DriverCard({ driver, onEdit, onToggleArchive }) {
   return (
     <div className="driver-card">
       {/* Status Line */}
-      <div className={`status-line ${driver.status === "Active" ? "active" : "inactive"}`} />
+      <div
+        className={`status-line ${
+          driver.status === "Active" ? "active" : "inactive"
+        }`}
+      />
 
       <div className="card-content">
         {/* Header */}
@@ -27,7 +44,9 @@ export function DriverCard({ driver, onEdit, onToggleArchive }) {
               </span>
             </div>
           </div>
-          <span className={`status-badge ${driver.status.toLowerCase()}`}>{driver.status}</span>
+          <span className={`status-badge ${driver.status.toLowerCase()}`}>
+            {driver.status}
+          </span>
         </div>
 
         {/* Contact & Rates */}
@@ -60,7 +79,10 @@ export function DriverCard({ driver, onEdit, onToggleArchive }) {
           <button className="btn edit" onClick={() => onEdit(driver)}>
             <Edit className="btn-icon" /> Edit
           </button>
-          <button className="btn archive" onClick={() => onToggleArchive(driver._id)}>
+          <button
+            className="btn archive"
+            onClick={() => onToggleArchive(driver)}
+          >
             {driver.status === "Active" ? (
               <>
                 <Archive className="btn-icon" /> Archive
@@ -70,6 +92,12 @@ export function DriverCard({ driver, onEdit, onToggleArchive }) {
                 <ArchiveRestore className="btn-icon" /> Restore
               </>
             )}
+          </button>
+          <button
+            className="btn delete"
+            onClick={() => onDeleteDriver(driver._id)}
+          >
+            <Trash2 className="btn-icon" />
           </button>
         </div>
       </div>
