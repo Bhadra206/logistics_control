@@ -1,0 +1,119 @@
+.vehicle-list-page {
+  min-height: 100vh;
+  background-color: #f9fafb; /* gray-50 */
+  font-family: sans-serif;
+}
+
+.vehicle-hero {
+  background-color: #000;
+  color: #fff;
+  padding: 3rem 0;
+}
+
+.vehicle-hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.vehicle-hero-text h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.vehicle-hero-text p {
+  font-size: 1.5rem;
+  color: #d2efff;
+  margin-bottom: 1.5rem;
+  max-width: 40rem;
+  text-align: justify;
+}
+
+.vehicle-add-btn {
+  background-color: #fff;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.vehicle-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffffff;
+  color: #000;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.vehicle-add-btn:hover {
+  background-color: #adadad;
+}
+
+.vehicle-add-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.vehicle-hero-image {
+  flex-shrink: 0;
+}
+
+.vehicle-hero-img {
+  width: 28rem;
+  height: 16rem;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 4px solid rgba(255, 255, 255, 0.2);
+}
+
+.vehicle-list-container {
+  padding: 2rem 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.vehicle-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.vehicle-no-results {
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280; /* gray-500 */
+  font-size: 1.125rem;
+}
+
+/* Responsive */
+@media (min-width: 1024px) {
+  .vehicle-hero-container {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+@media (max-width: 640px) {
+  .vehicle-hero-img {
+    width: 100%;
+    height: auto;
+  }
+  .vehicle-hero-text h1 {
+    font-size: 2rem;
+  }
+}

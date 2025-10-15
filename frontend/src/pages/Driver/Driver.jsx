@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { DriverList } from "../Components/DriverComponents/DriverList/DriverList";
 import { DriverForm } from "../Components/DriverComponents/DriverForm/DriverForm";
+import { useLocation } from "react-router-dom";
 
 function Driver() {
+  const location = useLocation();
   const [drivers, setDrivers] = useState([]);
   const [currentView, setCurrentView] = useState("list");
   const [selectedDriver, setSelectedDriver] = useState(null);
@@ -27,6 +29,12 @@ function Driver() {
   useEffect(() => {
     fetchDrivers();
   }, []);
+
+  useEffect(() => {
+    if (location.state?.showAddForm) {
+      setCurrentView("add");
+    }
+  }, [location.state]);
 
   const handleAddDriver = () => {
     setSelectedDriver(null);

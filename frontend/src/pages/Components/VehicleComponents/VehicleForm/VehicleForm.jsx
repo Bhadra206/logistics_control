@@ -7,12 +7,11 @@ export function VehicleForm({ vehicle, onSave, onCancel }) {
     name: "",
     model: "",
     registrationNo: "",
-    purpose: "",
+    purpose: "passenger",
     ratePerKm: "",
-    type: "",
-    status: "",
+    type: "LMV",
+    status: "Active",
   });
-
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -27,7 +26,7 @@ export function VehicleForm({ vehicle, onSave, onCancel }) {
         status: vehicle.status,
       });
     }
-  }, [driver]);
+  }, [vehicle]);
 
   const validationForm = () => {
     const newErrors = {};
@@ -53,7 +52,7 @@ export function VehicleForm({ vehicle, onSave, onCancel }) {
   };
 
   const handleSubmit = (e) => {
-    e.preventDeault();
+    e.preventDefault();
     if (!validationForm()) return;
 
     const vehicleData = {
@@ -61,9 +60,9 @@ export function VehicleForm({ vehicle, onSave, onCancel }) {
       name: formData.name.trim(),
       model: formData.model,
       registrationNo: formData.registrationNo,
-      ratePerKm: Number(formData.ratePerKm),
       purpose: formData.purpose,
       type: formData.type,
+      ratePerKm: Number(formData.ratePerKm),
       status: formData.status === "Archived" ? "Inactive" : formData.status,
     };
     onSave(vehicleData);
@@ -94,7 +93,7 @@ export function VehicleForm({ vehicle, onSave, onCancel }) {
       </div>
 
       <div className="vehicle-form-container">
-        <form onSumbit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           {/* Vehicle Info */}
           <section>
             <h3>
@@ -202,7 +201,7 @@ export function VehicleForm({ vehicle, onSave, onCancel }) {
           <div className="form-actions">
             <button type="submit" className="btn-primary">
               <CheckCircle size={18} />{" "}
-              {driver ? "Update Driver" : "Add Driver"}
+              {vehicle ? "Update Vehicle" : "Add Vehicle"}
             </button>
             <button type="button" onClick={onCancel} className="btn-secondary">
               Cancel

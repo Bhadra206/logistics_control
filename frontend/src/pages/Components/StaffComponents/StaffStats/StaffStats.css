@@ -1,0 +1,79 @@
+.staffstats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.staffstats-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  transition: transform 0.2s;
+}
+
+.staffstats-card:hover {
+  transform: translateY(-3px);
+}
+
+.staffstats-cardcontent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.staffstats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.staffstats-title {
+  font-size: 0.9rem;
+  color: #7c7c7c;
+}
+
+.staffstats-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  margin-top: 4px;
+}
+
+.staffstats-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.staffstats-icon {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+}
+
+/* Colors */
+.staffstats-icon-wrapper.blue,
+.staffstats-bar.blue {
+  background-color: #2196f3;
+}
+.staffstats-icon-wrapper.green,
+.staffstats-bar.green {
+  background-color: #4caf50;
+}
+.staffstats-icon-wrapper.purple,
+.staffstats-bar.purple {
+  background-color: #9c27b0;
+}
+.staffstats-icon-wrapper.orange,
+.staffstats-bar.orange {
+  background-color: #ff9800;
+}
+
+.staffstats-bar {
+  height: 4px;
+  border-radius: 2px;
+}

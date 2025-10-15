@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
+import { VehicleList } from "../Components/VehicleComponents/VehicleList/VehicleList";
+import { VehicleForm } from "../Components/VehicleComponents/VehicleForm/VehicleForm";
+import { useLocation } from "react-router-dom";
 
 function Vehicle() {
+  const location = useLocation();
   const [vehicles, setVehicles] = useState([]);
   const [currentView, setCurrentView] = useState("list");
   const [selectedVehicle, setSelectedVehicle] = useState(null);
@@ -27,6 +31,12 @@ function Vehicle() {
   useEffect(() => {
     fetchVehicles();
   }, []);
+
+  useEffect(() => {
+    if (location.state?.showAddForm) {
+      setCurrentView("add");
+    }
+  }, [location.state]);
 
   const handleAddVehicle = async () => {
     setSelectedVehicle(null);
@@ -56,7 +66,7 @@ function Vehicle() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(vehicleData),
         });
-        const data = res.json();
+        const data = await res.json();
         if (res.ok) {
           alert("Vehicle added successfully ✅");
         } else {

@@ -8,9 +8,9 @@ import {
   Car,
   CheckCircle,
 } from "lucide-react";
-import "./DriverForm.css";
+import "./StaffForm.css";
 
-export function DriverForm({ driver, onSave, onCancel }) {
+export function StaffForm({ driver, onSave, onCancel }) {
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",

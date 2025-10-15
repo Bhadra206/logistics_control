@@ -55,13 +55,28 @@ function AdminDashBoard() {
         <div>
           <h2 className="section-title">Quick Links</h2>
           <div className="section-buttons">
-            <button onClick={() => navigate("/addDriver")} className="buttons">
+            <button
+              onClick={() =>
+                navigate("/driver", { state: { showAddForm: true } })
+              }
+              className="buttons"
+            >
               Add Driver
             </button>
-            <button onClick={() => navigate("/addVehicle")} className="buttons">
+            <button
+              onClick={() =>
+                navigate("/vehicle", { state: { showAddForm: true } })
+              }
+              className="buttons"
+            >
               Add Vehicle
             </button>
-            <button onClick={() => navigate("/addStaff")} className="buttons">
+            <button
+              onClick={() =>
+                navigate("/staff", { status: { showAddForm: true } })
+              }
+              className="buttons"
+            >
               Add Staff
             </button>
           </div>

@@ -1,0 +1,79 @@
+.vehiclestats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.vehiclestats-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  transition: transform 0.2s;
+}
+
+.vehiclestats-card:hover {
+  transform: translateY(-3px);
+}
+
+.vehiclestats-cardcontent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vehiclestats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vehiclestats-title {
+  font-size: 0.9rem;
+  color: #7c7c7c;
+}
+
+.vehiclestats-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  margin-top: 4px;
+}
+
+.vehiclestats-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.vehiclestats-icon {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+}
+
+/* Colors */
+.vehiclestats-icon-wrapper.blue,
+.vehiclestats-bar.blue {
+  background-color: #2196f3;
+}
+.vehiclestats-icon-wrapper.green,
+.vehiclestats-bar.green {
+  background-color: #4caf50;
+}
+.vehiclestats-icon-wrapper.purple,
+.vehiclestats-bar.purple {
+  background-color: #9c27b0;
+}
+.vehiclestats-icon-wrapper.orange,
+.vehiclestats-bar.orange {
+  background-color: #ff9800;
+}
+
+.vehiclestats-bar {
+  height: 4px;
+  border-radius: 2px;
+}

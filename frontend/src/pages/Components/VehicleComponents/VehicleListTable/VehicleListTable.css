@@ -1,0 +1,138 @@
+.vehicle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.vehicle-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: box-shadow 0.2s;
+}
+
+.vehicle-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.vehicle-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vehicle-info-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .vehicle-info-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.value {
+  font-weight: 500;
+}
+
+.mono {
+  font-family: monospace;
+}
+
+.badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+/* Badge Base */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+}
+
+/* Purpose Badges */
+.badge.purpose.passenger {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.badge.purpose.goods {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.badge.purpose.both {
+  background-color: #ede9fe;
+  color: #5b21b6;
+}
+
+.badge.purpose.default {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+/* Type Badges */
+.badge.type.lmv {
+  background-color: #ffedd5;
+  color: #9a3412;
+}
+
+.badge.type.hmv {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* Status Badges */
+.badge.status.active {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.badge.status.archived {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.icon-btn {
+  height: 2rem;
+  width: 2rem;
+  background: transparent;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.icon-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.icon {
+  height: 1rem;
+  width: 1rem;
+  color: #374151;
+}
