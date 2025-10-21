@@ -2,8 +2,8 @@ import { useState, useMemo } from "react";
 import { UserPlus } from "lucide-react";
 import { StaffStats } from "../StaffStats/StaffStats";
 import { SearchAndFilters } from "../SearchAndFilter/SearchAndFilter";
-// import { StaffCard } from "../StaffCard/StaffCard";
-// import { StaffListTable } from "../StaffListTable/StaffListTable";
+import { StaffCard } from "../StaffCard/StaffCard";
+import { StaffListTable } from "../StaffListTable/StaffListTable";
 import "./StaffList.css";
 
 export function StaffList({ staffs, onEditStaff, onDeleteStaff, onAddStaff }) {

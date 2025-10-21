@@ -3,43 +3,72 @@ import {
   ArrowLeft,
   User,
   Phone,
-  IndianRupee,
-  Clock,
-  Car,
+  CalendarDays,
+  VenusAndMars,
   CheckCircle,
+  Mail,
+  MapPinHouse,
+  BriefcaseBusiness,
+  LockKeyhole,
 } from "lucide-react";
 import "./StaffForm.css";
 
-export function StaffForm({ driver, onSave, onCancel }) {
+export function StaffForm({ staff, onSave, onCancel }) {
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    dob: "",
+    gender: "Male",
     mobile: "",
-    perDayRate: "",
-    overTimeRate: "",
-    licence: "LMV",
-    status: "Active",
+    address: "",
+    position: "",
+    password: "",
+    type: "staff",
   });
 
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if (driver) {
+    if (staff) {
       setFormData({
-        name: driver.name,
-        mobile: driver.mobile,
-        perDayRate: driver.perDayRate.toString(),
-        overTimeRate: driver.overTimeRate.toString(),
-        licence: driver.licence,
-        status: driver.status,
+        firstName: staff.firstName,
+        lastName: staff.lastName,
+        email: staff.email,
+        dob: staff.dob ? new Date(staff.dob).toISOString().split("T")[0] : "",
+        gender: staff.gender,
+        mobile: staff.mobile,
+        address: staff.address,
+        position: staff.position,
+        password: staff.password,
+        type: staff.type,
       });
     }
-  }, [driver]);
+  }, [staff]);
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "First Name is required";
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = "Last Name is required";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Valid Email is required";
+    }
+
+    if (!formData.dob.trim()) {
+      newErrors.dob = "Date of Birth is required";
+    }
+
+    if (!formData.gender.trim()) {
+      newErrors.gender = "Gender is required";
     }
 
     if (!formData.mobile.trim()) {
@@ -48,20 +77,22 @@ export function StaffForm({ driver, onSave, onCancel }) {
       newErrors.mobile = "Mobile number must be 10 digits";
     }
 
-    if (
-      !formData.perDayRate ||
-      isNaN(Number(formData.perDayRate)) ||
-      Number(formData.perDayRate) <= 0
-    ) {
-      newErrors.perDayRate = "Valid per day rate is required";
+    if (!formData.address.trim()) {
+      newErrors.address = "Address is required";
     }
 
-    if (
-      !formData.overTimeRate ||
-      isNaN(Number(formData.overTimeRate)) ||
-      Number(formData.overTimeRate) <= 0
-    ) {
-      newErrors.overTimeRate = "Valid overtime rate is required";
+    if (!formData.position.trim()) {
+      newErrors.position = "Position is required";
+    }
+
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    }
+
+    if (!formData.type.trim()) {
+      newErrors.type = "Type is required";
     }
 
     setErrors(newErrors);
@@ -72,17 +103,21 @@ export function StaffForm({ driver, onSave, onCancel }) {
     e.preventDefault();
     if (!validateForm()) return;
 
-    const driverData = {
-      ...(driver && { _id: driver._id }),
-      name: formData.name.trim(),
+    const staffData = {
+      ...(staff && { _id: staff._id }),
+      firstName: formData.firstName.trim(),
+      lastName: formData.lastName.trim(),
+      email: formData.email.trim(),
+      dob: formData.dob ? new Date(formData.dob) : null,
+      gender: formData.gender,
       mobile: formData.mobile,
-      perDayRate: Number(formData.perDayRate),
-      overTimeRate: Number(formData.overTimeRate),
-      licence: formData.licence,
-      status: formData.status === "Archived" ? "Inactive" : formData.status,
+      address: formData.address.trim(),
+      position: formData.position,
+      password: formData.password,
+      type: formData.type,
     };
 
-    onSave(driverData);
+    onSave(staffData);
   };
 
   const handleInputChange = (field, value) => {
@@ -93,23 +128,23 @@ export function StaffForm({ driver, onSave, onCancel }) {
   };
 
   return (
-    <div className="driver-form">
+    <div className="staff-form">
       {/* Header */}
-      <div className="driver-form-header">
-        <button onClick={onCancel} className="driver-form-back-btn">
+      <div className="staff-form-header">
+        <button onClick={onCancel} className="staff-form-back-btn">
           <ArrowLeft size={18} />
         </button>
         <div>
-          <h1>{driver ? "Edit Driver" : "Add New Driver"}</h1>
+          <h1>{staff ? "Edit Staff" : "Add New Staff"}</h1>
           <p>
-            {driver
-              ? "Update driver information"
-              : "Enter driver details to add them to your fleet"}
+            {staff
+              ? "Update staff information"
+              : "Enter staff details to add them to your fleet"}
           </p>
         </div>
       </div>
 
-      <div className="driver-form-container">
+      <div className="staff-form-container">
         <form onSubmit={handleSubmit}>
           {/* Personal Info */}
           <section>
@@ -119,15 +154,86 @@ export function StaffForm({ driver, onSave, onCancel }) {
             <div className="form-grid">
               <div className="form-group">
                 <label>
-                  <User size={14} /> Full Name
+                  <User size={14} /> First Name
                 </label>
                 <input
                   type="text"
-                  value={formData.name}
-                  onChange={(e) => handleInputChange("name", e.target.value)}
-                  placeholder="Enter full name"
+                  value={formData.firstName}
+                  onChange={(e) =>
+                    handleInputChange("firstName", e.target.value)
+                  }
+                  placeholder="Enter first name"
                 />
-                {errors.name && <p className="error">{errors.name}</p>}
+                {errors.firstName && (
+                  <p className="error">{errors.firstName}</p>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label>
+                  <User size={14} /> Last Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.lastName}
+                  onChange={(e) =>
+                    handleInputChange("lastName", e.target.value)
+                  }
+                  placeholder="Enter last name"
+                />
+                {errors.lastName && <p className="error">{errors.lastName}</p>}
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div className="form-grid">
+              <div className="form-group">
+                <label>
+                  <Mail size={14} />
+                  Email
+                </label>
+                <input
+                  type="text"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  placeholder="Enter email"
+                />
+                {errors.email && <p className="error">{errors.email}</p>}
+              </div>
+
+              <div className="form-group">
+                <label>
+                  <CalendarDays size={14} /> Date of Birth
+                </label>
+                <input
+                  type="date"
+                  value={formData.dob}
+                  onChange={(e) => handleInputChange("dob", e.target.value)}
+                  placeholder="Enter date of birth"
+                />
+                {errors.dob && <p className="error">{errors.dob}</p>}
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div className="form-grid">
+              <div className="form-group">
+                <label>
+                  <VenusAndMars size={14} /> Gender
+                </label>
+                <select
+                  value={formData.gender}
+                  onChange={(e) => {
+                    handleInputChange("gender", e.target.value);
+                  }}
+                >
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+                {errors.gender && <p className="error">{errors.gender}</p>}
               </div>
 
               <div className="form-group">
@@ -146,77 +252,71 @@ export function StaffForm({ driver, onSave, onCancel }) {
             </div>
           </section>
 
-          {/* Rate Info */}
           <section>
-            <h3>
-              <IndianRupee size={18} color="green" /> Rate Information
-            </h3>
             <div className="form-grid">
               <div className="form-group">
                 <label>
-                  <IndianRupee size={14} /> Per Day Rate
+                  <MapPinHouse size={14} /> Address
                 </label>
                 <input
-                  type="number"
-                  value={formData.perDayRate}
-                  onChange={(e) =>
-                    handleInputChange("perDayRate", e.target.value)
-                  }
-                  placeholder="Enter daily rate"
+                  type="text"
+                  maxLength={100}
+                  value={formData.address}
+                  onChange={(e) => {
+                    handleInputChange("address", e.target.value);
+                  }}
+                  placeholder="Enter address"
                 />
-                {errors.perDayRate && (
-                  <p className="error">{errors.perDayRate}</p>
-                )}
+                {errors.address && <p className="error">{errors.address}</p>}
               </div>
 
               <div className="form-group">
                 <label>
-                  <Clock size={14} /> Overtime Rate (per hour)
+                  <BriefcaseBusiness size={14} /> Position
                 </label>
                 <input
-                  type="number"
-                  value={formData.overTimeRate}
+                  type="text"
+                  value={formData.position}
                   onChange={(e) =>
-                    handleInputChange("overTimeRate", e.target.value)
+                    handleInputChange("position", e.target.value)
                   }
-                  placeholder="Enter hourly overtime rate"
+                  placeholder="Enter position"
                 />
-                {errors.overTimeRate && (
-                  <p className="error">{errors.overTimeRate}</p>
-                )}
+                {errors.position && <p className="error">{errors.position}</p>}
               </div>
             </div>
           </section>
 
-          {/* licence & Status */}
           <section>
-            <h3>
-              <Car size={18} color="purple" /> licence & Status
-            </h3>
             <div className="form-grid">
               <div className="form-group">
                 <label>
-                  <Car size={14} /> licence Type
+                  <LockKeyhole size={14} /> Password
                 </label>
-                <select
-                  value={formData.licence}
-                  onChange={(e) => handleInputChange("licence", e.target.value)}
-                >
-                  <option value="LMV">LMV (Light Motor Vehicle)</option>
-                  <option value="HMV">HMV (Heavy Motor Vehicle)</option>
-                </select>
+                <input
+                  type="password"
+                  maxLength={10}
+                  value={formData.password}
+                  onChange={(e) =>
+                    handleInputChange("password", e.target.value)
+                  }
+                  placeholder={staff ? "Password is hidden" : "Enter password"}
+                  disabled={!!staff}
+                />
+
+                {errors.password && <p className="error">{errors.password}</p>}
               </div>
 
               <div className="form-group">
                 <label>
-                  <CheckCircle size={14} /> Status
+                  <CheckCircle size={14} /> Type
                 </label>
                 <select
-                  value={formData.status}
-                  onChange={(e) => handleInputChange("status", e.target.value)}
+                  value={formData.type}
+                  onChange={(e) => handleInputChange("type", e.target.value)}
                 >
-                  <option value="Active">Active</option>
-                  <option value="Archived">Archived</option>
+                  <option value="admin">Admin</option>
+                  <option value="staff">Staff</option>
                 </select>
               </div>
             </div>
@@ -225,8 +325,7 @@ export function StaffForm({ driver, onSave, onCancel }) {
           {/* Buttons */}
           <div className="form-actions">
             <button type="submit" className="btn-primary">
-              <CheckCircle size={18} />{" "}
-              {driver ? "Update Driver" : "Add Driver"}
+              <CheckCircle size={18} /> {staff ? "Update staff" : "Add staff"}
             </button>
             <button type="button" onClick={onCancel} className="btn-secondary">
               Cancel

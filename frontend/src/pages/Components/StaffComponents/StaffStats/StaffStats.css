@@ -64,13 +64,9 @@
 .staffstats-bar.green {
   background-color: #4caf50;
 }
-.staffstats-icon-wrapper.purple,
-.staffstats-bar.purple {
-  background-color: #9c27b0;
-}
-.staffstats-icon-wrapper.orange,
-.staffstats-bar.orange {
-  background-color: #ff9800;
+.staffstats-icon-wrapper.red,
+.staffstats-bar.red {
+  background-color: red;
 }
 
 .staffstats-bar {

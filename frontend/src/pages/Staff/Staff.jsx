@@ -13,9 +13,10 @@ function Staff() {
     try {
       const res = await fetch("http://localhost:3000/staff/getstaff");
       const data = await res.json();
+      console.log("Fetched staff data:", data);
 
       if (res.ok) {
-        setStaffs(Array.isArray(data.data.staffs) ? data.data.staffs : []);
+        setStaffs(Array.isArray(data.data) ? data.data : []);
       } else {
         setStaffs([]);
         console.error("Failed to fetch staffs:", data.message);

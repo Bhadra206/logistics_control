@@ -1,15 +1,29 @@
-import { Users, UserCheck, Archive, TrendingUp } from "lucide-react";
+import { Users, UserCog, User } from "lucide-react";
 import "./StaffStats.css";
 
 export function StaffStats({ staffs }) {
   const totalStaffs = staffs.length;
-  
+  const admin = staffs.filter((a) => a.type === "admin").length;
+  const staff = staffs.filter((s) => s.type === "staff").length;
+
   const stats = [
     {
-      title: "Total Staffs",
+      title: "All Staffs",
       value: totalStaffs,
       icon: Users,
       color: "blue",
+    },
+    {
+      title: "Total Admins",
+      value: admin,
+      icon: UserCog,
+      color: "red",
+    },
+    {
+      title: "Total Staffs",
+      value: staff,
+      icon: User,
+      color: "green",
     },
   ];
 

@@ -73,7 +73,7 @@ function AdminDashBoard() {
             </button>
             <button
               onClick={() =>
-                navigate("/staff", { status: { showAddForm: true } })
+                navigate("/staff", { state: { showAddForm: true } })
               }
               className="buttons"
             >

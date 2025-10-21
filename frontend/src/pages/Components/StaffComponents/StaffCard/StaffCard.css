@@ -1,0 +1,188 @@
+.staff-card {
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  transition: box-shadow 0.3s;
+  margin: 10px;
+}
+
+.staff-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Type badge (admin/staff) */
+.type-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.type-badge.admin {
+  background: #dbeafe;
+  color: #1e3a8a;
+  border: 1px solid #93c5fd;
+}
+
+.type-badge.staff {
+  background: #f3e8ff;
+  color: #6b21a8;
+  border: 1px solid #d8b4fe;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 16px;
+}
+
+.staff-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #6b7280, #8b5cf6);
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.staff-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #111827;
+}
+
+.staff-position,
+.staff-gender {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 4px;
+}
+
+/* .staff-gender {
+  height: 5px;
+  width: 5px;
+} */
+
+.card-details {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn {
+  flex: 1;
+  padding: 6px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 14px;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn.edit {
+  color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.btn.delete {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.card-details {
+  transition: all 0.3s ease;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.role-icon {
+  width: 10px;
+  height: 10px;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+
+.admin-icon {
+  color: #b91c1c; /* red */
+}
+
+.staff-icon {
+  color: #2563eb; /* blue */
+}
+
+.type-badge.admin {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.type-badge.staff {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+.btn.view {
+  color: #6b21a8;
+  border-color: #a78bfa;
+}
+
+.position-gender {
+  display: flex;
+}
