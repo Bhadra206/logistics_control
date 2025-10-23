@@ -44,23 +44,23 @@
   padding: 1rem 2rem 2rem;
 }
 
-.form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.form-group {
+.login-form-group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.input-wrapper {
+.login-input-wrapper {
   position: relative;
 }
 
-.input-wrapper input {
+.login-input-wrapper input {
   width: 90%;
   background-color: rgb(239, 239, 239);
   padding: 0.75rem 0.75rem 0.75rem 2.5rem;

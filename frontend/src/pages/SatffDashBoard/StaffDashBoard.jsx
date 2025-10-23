@@ -1,45 +1,51 @@
 import { useState, useEffect } from "react";
-import OrderForm from "./OrderForm";
+import OrderForm from "../Components/OrderComponents/OrderForm/OrderForm";
+import OrderList from "../Components/OrderComponents/OrderList/OrderList";
 import "./StaffDashBoard.css";
+import { ArrowLeft, Plus, Calendar, Search, Truck } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-const getTodayDate = () => new Date().toISOString().split("T")[0];
-
-export default function App() {
+export default function StaffDashBoard() {
   const [orders, setOrders] = useState([]);
   const [currentView, setCurrentView] = useState("list");
   const [editingOrder, setEditingOrder] = useState(null);
-  const [filterDate, setFilterDate] = useState(getTodayDate());
+  const [filterDate, setFilterDate] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  // Fetch orders from backend
+  // Fetch all orders on load (staff login)
   useEffect(() => {
     const fetchOrders = async () => {
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:3000/order/getAllOrders");
+        let url = "http://localhost:3000/order/getAllOrders";
+
+        if (filterDate) {
+          url = `http://localhost:3000/order/getOrders?startDate=${filterDate}`;
+        }
+
+        const res = await fetch(url);
         if (!res.ok) throw new Error("Failed to fetch orders");
         const data = await res.json();
-        setOrders(data);
+
+        setOrders(data.orders || data.data || []);
       } catch (err) {
-        setError(err.message || "Something went wrong");
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
     fetchOrders();
-  }, []);
+  }, [filterDate]);
 
-  // Filter orders by date and search
+  // Search filter (client-side)
   const filteredOrders = orders.filter((order) => {
-    const matchesDate = !filterDate || order.startDate === filterDate;
-
-    const matchesSearch =
-      searchQuery === "" ||
-      order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.customerName.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesDate && matchesSearch;
+    return (
+      order.customerName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order._id?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   });
 
   const handleCreateOrder = () => {
@@ -57,12 +63,10 @@ export default function App() {
       try {
         const res = await fetch(
           `http://localhost:3000/order/deleteOrder/${orderId}`,
-          {
-            method: "DELETE",
-          }
+          { method: "DELETE" }
         );
         if (!res.ok) throw new Error("Failed to delete order");
-        setOrders((prev) => prev.filter((order) => order.id !== orderId));
+        setOrders((prev) => prev.filter((order) => order._id !== orderId));
       } catch (err) {
         alert(err.message);
       }
@@ -73,9 +77,9 @@ export default function App() {
     try {
       if (editingOrder) {
         const res = await fetch(
-          `http://localhost:3000//order/replaceOrder/${order.id}`,
+          `http://localhost:3000/order/updateOrderPartial/${order._id}`,
           {
-            method: "PUT",
+            method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(order),
           }
@@ -83,7 +87,7 @@ export default function App() {
         if (!res.ok) throw new Error("Failed to update order");
         const updatedOrder = await res.json();
         setOrders((prev) =>
-          prev.map((o) => (o.id === updatedOrder.id ? updatedOrder : o))
+          prev.map((o) => (o._id === updatedOrder._id ? updatedOrder : o))
         );
       } else {
         const res = await fetch("http://localhost:3000/order/createOrder", {
@@ -108,104 +112,108 @@ export default function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className="staffDashboard-container">
       {/* Header */}
-      <header>
-        <div>
-          {currentView !== "list" && (
-            <button onClick={() => setCurrentView("list")}>← Back</button>
-          )}
-          <h1>Travel Orders Management</h1>
+      <header className="staffDashboard-header">
+        <div className="staffDashboard-header-left">
+          {currentView === "list" && <h1>Travel Orders Management</h1>}
         </div>
         {currentView === "list" && (
-          <button onClick={handleCreateOrder}>+ Create Order</button>
+          <div className="header-button-group">
+            <button
+              className="btn-outline"
+              onClick={() => navigate("/allocateOrders")}
+            >
+              <Truck className="order-icon" />
+              Order Allocation
+            </button>
+            <button className="btn-primary" onClick={handleCreateOrder}>
+              <Plus className="order-icon" />
+              Create Order
+            </button>
+          </div>
         )}
       </header>
 
-      {loading && <p className="loading">Loading orders...</p>}
-      {error && <p className="error">{error}</p>}
+      {/* Main */}
+      <main className="staffDashboard-main">
+        {currentView === "list" && (
+          <>
+            {/* Hero Section */}
+            <div className="staffDashboard-hero">
+              <h2>Travel Orders from Kochi</h2>
+              <p>Manage passenger and goods transportation across India</p>
+            </div>
 
-      {/* List View */}
-      {currentView === "list" && (
-        <div>
-          {/* Filters */}
-          <div className="filters">
-            <input
-              type="text"
-              placeholder="Search by Order ID or Customer Name"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <label>
-              Filter by Date:
-              <input
-                type="date"
-                value={filterDate}
-                onChange={(e) => setFilterDate(e.target.value)}
-                min={getTodayDate()}
+            {/* Filters */}
+            <div className="orders-section">
+              <div className="orders-header">
+                <h3>Order List</h3>
+                <div className="orders-filters">
+                  {/* Search */}
+                  <div className="search-filter">
+                    <div className="search-input-wrapper">
+                      <Search size={14} className="icon-inside" />
+                      <input
+                        type="text"
+                        placeholder="Search by Order ID or Customer Name"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Date */}
+                  <div className="date-filter">
+                    <Calendar size={16} className="icon-small" />
+                    <label htmlFor="filter-date">Filter by Date:</label>
+                    <input
+                      id="filter-date"
+                      type="date"
+                      value={filterDate}
+                      onChange={(e) => setFilterDate(e.target.value)}
+                    />
+                  </div>
+
+                  <p className="order-count">
+                    Showing {filteredOrders.length} orders for{" "}
+                    {new Date(filterDate).toLocaleDateString()}
+                  </p>
+                </div>
+              </div>
+
+              {/* List */}
+              <OrderList
+                orders={filteredOrders}
+                onEdit={handleEditOrder}
+                onDelete={handleDeleteOrder}
               />
-            </label>
-          </div>
-          <OrderList
-            orders={filteredOrders}
-            onEdit={handleEditOrder}
-            onDelete={handleDeleteOrder}
-          />
-          {/* Orders Table */}
-          {filteredOrders.length > 0 ? (
-            <table className="orders-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Customer</th>
-                  <th>Start</th>
-                  <th>Drop</th>
-                  <th>Date</th>
-                  <th>Service</th>
-                  <th>Passengers/Weight</th>
-                  <th>Distance</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredOrders.map((order) => (
-                  <tr key={order.id}>
-                    <td>{order.id}</td>
-                    <td>{order.customerName}</td>
-                    <td>{order.startLocation}</td>
-                    <td>{order.dropLocation}</td>
-                    <td>{order.startDate}</td>
-                    <td>{order.serviceType}</td>
-                    <td>{order.passengersOrWeight}</td>
-                    <td>{order.distance}</td>
-                    <td>{order.status}</td>
-                    <td>
-                      <button onClick={() => handleEditOrder(order)}>
-                        Edit
-                      </button>
-                      <button onClick={() => handleDeleteOrder(order.id)}>
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <div className="no-orders">No orders found.</div>
-          )}
-        </div>
-      )}
 
-      {/* Create/Edit View */}
-      {(currentView === "create" || currentView === "edit") && (
-        <OrderForm
-          order={editingOrder}
-          onSave={handleSaveOrder}
-          onCancel={handleCancel}
-        />
-      )}
+              {/* No orders */}
+              {filteredOrders.length === 0 && !loading && (
+                <div className="no-orders">
+                  <Calendar className="icon-large" />
+                  <p>
+                    No orders found for{" "}
+                    {new Date(filterDate).toLocaleDateString()}
+                  </p>
+                  <p className="note">
+                    Try selecting a different date or create a new order.
+                  </p>
+                </div>
+              )}
+            </div>
+          </>
+        )}
+
+        {(currentView === "create" || currentView === "edit") && (
+          <OrderForm
+            order={editingOrder}
+            onSave={handleSaveOrder}
+            onCancel={handleCancel}
+          />
+        )}
+      </main>
     </div>
   );
 }

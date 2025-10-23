@@ -122,10 +122,10 @@ export default function Login() {
         </div>
 
         <div className="card-content">
-          <form onSubmit={handleSubmit} className="form">
-            <div className="form-group">
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="login-form-group">
               <label htmlFor="email">Email Address</label>
-              <div className="input-wrapper">
+              <div className="login-input-wrapper">
                 <Mail className="input-icon" />
                 <input
                   id="email"
@@ -138,9 +138,9 @@ export default function Login() {
               </div>
             </div>
 
-            <div className="form-group">
+            <div className="login-form-group">
               <label htmlFor="password">Password</label>
-              <div className="input-wrapper">
+              <div className="login-input-wrapper">
                 <Lock className="input-icon" />
                 <input
                   id="password"
@@ -156,9 +156,7 @@ export default function Login() {
                   type="button"
                   className="password-toggle"
                   onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <EyeOff /> : <Eye />}
-                </button>
+                ></button>
               </div>
             </div>
 

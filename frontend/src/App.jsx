@@ -4,6 +4,7 @@ import Driver from "./pages/Driver/Driver";
 import Vehicle from "./pages/Vehicle/Vehicle";
 import Staff from "./pages/Staff/Staff";
 import Login from "./pages/Login/Login";
+import StaffDashBoard from "./pages/SatffDashBoard/StaffDashBoard";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/driver" element={<Driver />} />
         <Route path="/vehicle" element={<Vehicle />} />
         <Route path="/staff" element={<Staff />} />
+        <Route path="/staffDashboard" element={<StaffDashBoard />} />
       </Routes>
     </BrowserRouter>
   );
