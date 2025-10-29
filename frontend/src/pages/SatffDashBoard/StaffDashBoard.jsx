@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import OrderForm from "../Components/OrderComponents/OrderForm/OrderForm";
 import OrderList from "../Components/OrderComponents/OrderList/OrderList";
 import "./StaffDashBoard.css";
-import { ArrowLeft, Plus, Calendar, Search, Truck } from "lucide-react";
+import { Plus, Calendar, Search, Truck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function StaffDashBoard() {
@@ -16,29 +16,31 @@ export default function StaffDashBoard() {
   const navigate = useNavigate();
 
   // Fetch all orders on load (staff login)
+  // Fetch all orders on load (staff login)
   useEffect(() => {
-    const fetchOrders = async () => {
-      setLoading(true);
-      try {
-        let url = "http://localhost:3000/order/getAllOrders";
-
-        if (filterDate) {
-          url = `http://localhost:3000/order/getOrders?startDate=${filterDate}`;
-        }
-
-        const res = await fetch(url);
-        if (!res.ok) throw new Error("Failed to fetch orders");
-        const data = await res.json();
-
-        setOrders(data.orders || data.data || []);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchOrders();
   }, [filterDate]);
+
+  const fetchOrders = async () => {
+    setLoading(true);
+    try {
+      let url = "http://localhost:3000/order/getAllOrders";
+
+      if (filterDate) {
+        url = `http://localhost:3000/order/getOrders?startDate=${filterDate}`;
+      }
+
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Failed to fetch orders");
+      const data = await res.json();
+
+      setOrders(data.orders || data.data || []);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Search filter (client-side)
   const filteredOrders = orders.filter((order) => {
@@ -76,19 +78,17 @@ export default function StaffDashBoard() {
   const handleSaveOrder = async (order) => {
     try {
       if (editingOrder) {
+        console.log("Saving order:", order);
         const res = await fetch(
-          `http://localhost:3000/order/updateOrderPartial/${order._id}`,
+          `http://localhost:3000/order/replaceOrder/${order._id}`,
           {
-            method: "PATCH",
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(order),
           }
         );
         if (!res.ok) throw new Error("Failed to update order");
-        const updatedOrder = await res.json();
-        setOrders((prev) =>
-          prev.map((o) => (o._id === updatedOrder._id ? updatedOrder : o))
-        );
+        await res.json();
       } else {
         const res = await fetch("http://localhost:3000/order/createOrder", {
           method: "POST",
@@ -96,19 +96,22 @@ export default function StaffDashBoard() {
           body: JSON.stringify(order),
         });
         if (!res.ok) throw new Error("Failed to create order");
-        const newOrder = await res.json();
-        setOrders((prev) => [...prev, newOrder]);
+        await res.json();
       }
+      await fetchOrders();
+
       setCurrentView("list");
       setEditingOrder(null);
+      alert("Order updated successfully ✅");
     } catch (err) {
       alert(err.message);
     }
   };
 
-  const handleCancel = () => {
+  const handleCancel = async () => {
     setCurrentView("list");
     setEditingOrder(null);
+    await fetchOrders();
   };
 
   return (

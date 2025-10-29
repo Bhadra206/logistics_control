@@ -36,6 +36,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
 
     const formattedData = {
       ...formData,
+       _id: order?._id || formData._id,
       startDate: new Date(formData.startDate),
       endDate: new Date(formData.endDate),
       numPassengers:
@@ -200,7 +201,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
           )}
           {formData.typeOfService === "goods" && (
             <div className="order-form-group">
-              <label>Weight (kg)</label>
+              <label>Weight (Ton)</label>
               <input
                 type="number"
                 value={formData.weight}
@@ -229,7 +230,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
                 <label>Driver</label>
                 <input
                   type="text"
-                  value={formData.driver}
+                  value={formData.driver || ""}
                   onChange={(e) => handleChange("driver", e.target.value)}
                   readOnly
                 />
@@ -238,7 +239,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
                 <label>Vehicle</label>
                 <input
                   type="text"
-                  value={formData.vehicle}
+                  value={formData.vehicle || ""}
                   onChange={(e) => handleChange("vehicle", e.target.value)}
                   readOnly
                 />
@@ -250,7 +251,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
                 <label>Total Cost</label>
                 <input
                   type="number"
-                  value={formData.TotalCost}
+                  value={formData.TotalCost || ""}
                   onChange={(e) => handleChange("TotalCost", e.target.value)}
                   readOnly
                 />
@@ -259,7 +260,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
                 <label>Overtime Hours</label>
                 <input
                   type="number"
-                  value={formData.overtimeHours}
+                  value={formData.overtimeHours || ""}
                   onChange={(e) =>
                     handleChange("overtimeHours", e.target.value)
                   }

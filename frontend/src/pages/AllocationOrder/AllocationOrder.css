@@ -1,0 +1,195 @@
+/* container */
+.allocation-root {
+  min-height: 100vh;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Top bar */
+.top-bar {
+  background: #ffffff;
+  border-bottom: 1px solid #e6e9ee;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* cost & stats */
+.cost-and-stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.total-cost {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  color: #16a34a;
+}
+
+.total-cost-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #16a34a;
+}
+
+.stats {
+  display: flex;
+  gap: 8px;
+}
+
+.stat-badge {
+  background: #f3f4f6;
+  color: #111827;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+/* controls area */
+.controls-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.date-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #374151;
+  font-size: 14px;
+}
+
+.date-input {
+  border: 1px solid #d1d5db;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.save-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #10b981;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* main area */
+.main-area {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+/* vehicles area */
+.vehicles-top .panel {
+  background: #fff;
+  border: 1px solid #e6e9ee;
+  border-radius: 8px;
+  height: 190px;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header {
+  padding: 12px 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.panel-body {
+  padding: 12px 16px;
+  overflow: auto;
+}
+
+/* bottom area layout */
+.bottom-area {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+/* sidebar drivers */
+.sidebar {
+  width: 260px;
+}
+
+.orders-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.orders-scroll {
+  min-height: 200px;
+}
+
+.vehicles-scroll {
+  display: flex;
+  align-items: center;
+}
+
+/* orders grid */
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .orders-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .orders-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* no orders placeholder */
+.no-orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #6b7280;
+  padding: 24px;
+}
+
+.big-icon {
+  width: 48px;
+  height: 48px;
+  color: #9ca3af;
+}

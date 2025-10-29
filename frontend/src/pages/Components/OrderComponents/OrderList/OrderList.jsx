@@ -63,7 +63,7 @@ export default function OrderList({ orders, onEdit, onDelete }) {
                 <td>
                   {order.typeOfService === "passenger"
                     ? `${order.numPassengers} Passengers`
-                    : `${order.weight} kg`}
+                    : `${order.weight} Ton`}
                 </td>
                 <td>{order.distance || "-"}</td>
                 <td>
