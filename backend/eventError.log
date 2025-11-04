@@ -158,3 +158,9 @@
 {"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T09:04:21.375Z"}
 {"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T09:05:05.916Z"}
 {"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T09:07:39.034Z"}
+{"level":"error","message":"Error deleting driver","timestamp":"2025-11-04T06:22:27.525Z"}
+{"level":"error","message":"Error deleting driver","timestamp":"2025-11-04T06:25:54.727Z"}
+{"level":"error","message":"Error deleting vehicle","timestamp":"2025-11-04T06:27:44.495Z"}
+{"level":"error","message":"Error deleting vehicle","timestamp":"2025-11-04T06:29:13.603Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-11-04T08:35:26.646Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-11-04T08:37:57.335Z"}

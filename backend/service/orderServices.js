@@ -52,7 +52,7 @@ const getOrders = async (startDate) => {
           numPassengers: 1,
           weight: 1,
           distance: 1,
-          TotalCost: 1,
+          totalCost: 1,
           overtimeHours: 1,
           status: 1,
         },
@@ -105,7 +105,7 @@ const getAllOrders = async () => {
         numPassengers: 1,
         weight: 1,
         distance: 1,
-        TotalCost: 1,
+        totalCost: 1,
         overtimeHours: 1,
         status: 1,
       },
@@ -167,6 +167,8 @@ const replaceOrder = async (id, orderData) => {
     const order = await Order.findById(id);
     if (!order) if (!order) throw new Error("Order not found");
 
+    console.log("Update Data:", orderData);
+
     const updatedOrder = await Order.findByIdAndUpdate(id, orderData, {
       new: true,
     });
@@ -200,54 +202,49 @@ const updateOrderPartial = async (id, updateData) => {
     "distance",
   ];
 
-  const isOnlyCustomerUpdate = Object.keys(updateData).every((key) =>
-    customerFields.includes(key)
-  );
+  // ✅ Detect which fields actually changed
+  const changedFields = Object.keys(updateData).filter((key) => {
+    const oldVal = order[key];
+    const newVal = updateData[key];
+    return JSON.stringify(oldVal) !== JSON.stringify(newVal);
+  });
 
-  const affectsAllocation = Object.keys(updateData).some((key) =>
+  const isOnlyCustomerUpdate =
+    changedFields.length > 0 &&
+    changedFields.every((key) => customerFields.includes(key));
+
+  const affectsAllocation = changedFields.some((key) =>
     allocationAffectingFields.includes(key)
   );
 
   const update = { $set: updateData };
 
-  // 🔹 If allocation-affecting fields changed, unset driver/vehicle
+  // 🔹 If allocation-impacting fields changed, unset driver/vehicle/costs
   if (affectsAllocation && !isOnlyCustomerUpdate) {
-    update.$unset = { driver: 1, vehicle: 1 };
-    update.$set.status = "Pending"; // reset to pending when allocation changes
-  }
+    // Avoid Mongo conflict by removing fields from $set before unsetting
+    if (update.$set) {
+      delete update.$set.driver;
+      delete update.$set.vehicle;
+      delete update.$set.totalCost;
+      delete update.$set.overtimeHours;
+    }
 
-  // 🔹 Always include total cost & status recalculation
-  const driver = await Driver.findById(updateData.driver || order.driver);
-  const vehicle = await Vehicle.findById(updateData.vehicle || order.vehicle);
-
-  if (driver && vehicle) {
-    const distance = updateData.distance ?? order.distance ?? 0;
-    const daysOfService = updateData.numberOfDays ?? order.numberOfDays ?? 0;
-
-    let overtimeHours = Math.ceil((distance - daysOfService * 400) / 50);
-    if (overtimeHours < 0) overtimeHours = 0;
-
-    const vehicleCost = distance * (vehicle.ratePerKm || 0);
-    let driverCost = daysOfService * (driver.perDayRate || 0);
-
-    if (overtimeHours > 0)
-      driverCost += overtimeHours * (driver.overTimeRate || 0);
-
-    const totalCost = vehicleCost + driverCost;
-
-    // ✅ If both driver and vehicle exist, mark as Allocated
-    Object.assign(update.$set, {
-      overtimeHours,
-      vehicleCost,
-      driverCost,
-      totalCost,
-      status: "Allocated",
-    });
-  } else if (!isOnlyCustomerUpdate && !update.$set.status) {
-    // If driver/vehicle missing and not just a customer edit
+    update.$unset = {
+      driver: 1,
+      vehicle: 1,
+      totalCost: 1,
+      overtimeHours: 1,
+    };
     update.$set.status = "Pending";
+  } else if (!isOnlyCustomerUpdate && !update.$set.status) {
+    // Default to pending if something else changes
+    update.$set.status = "Pending";
+  } else if (isOnlyCustomerUpdate) {
+    // Keep the old status for customer-only updates
+    update.$set.status = order.status;
   }
 
+  // 🔹 Save changes
   const updatedOrder = await Order.findByIdAndUpdate(id, update, {
     new: true,
   }).populate("driver vehicle");

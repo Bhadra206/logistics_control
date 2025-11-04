@@ -57,7 +57,8 @@ const createOrder = async (req, res) => {
 const replaceOrder = async (req, res) => {
   try {
     const { id } = req.params;
-    orderData = req.body;
+    const orderData = req.body;
+    console.log(orderData);
     const updatedOrder = await orderServices.replaceOrder(id, orderData);
     eventLogger.info("Order has been fully updated");
     res.status(200).json({ success: true, data: updatedOrder });
