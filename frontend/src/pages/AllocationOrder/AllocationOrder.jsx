@@ -211,6 +211,7 @@ export default function AllocationOrder() {
 
     try {
       for (const order of allocatedOrders) {
+        const totalCost = calculateOrderCost(order);
         const res = await fetch(
           `http://localhost:3000/order/replaceOrder/${order._id}`,
           {
@@ -219,6 +220,7 @@ export default function AllocationOrder() {
             body: JSON.stringify({
               driver: order.assignedDriverId,
               vehicle: order.assignedVehicleId,
+              totalCost,
               status: "Allocated",
             }),
           }

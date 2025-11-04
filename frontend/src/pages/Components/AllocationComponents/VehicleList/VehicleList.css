@@ -126,14 +126,14 @@
   gap: 0.5rem;
 }
 
-.vehicle-type {
-  display: inline-block;
-  font-size: 0.75rem;
-  background-color: #ecfdf5;
-  color: #065f46;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  border: 1px solid #a7f3d0;
+.badge.type.lmv {
+  background-color: #ffedd5;
+  color: #9a3412;
+}
+
+.badge.type.hmv {
+  background-color: #fee2e2;
+  color: #991b1b;
 }
 
 .info-icon {

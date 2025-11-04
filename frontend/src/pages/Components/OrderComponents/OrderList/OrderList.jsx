@@ -101,7 +101,7 @@ export default function OrderList({ orders, onEdit, onDelete }) {
                 </p>
               )}
               <p>
-                <strong>Total Cost:</strong> {order.TotalCost || "-"}
+                <strong>Total Cost:</strong> {order.totalCost || "-"}
               </p>
               <p>
                 <strong>Overtime Hours:</strong> {order.overtimeHours || "-"}

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-import { Truck, DollarSign, Fuel } from "lucide-react";
+import { Truck, Fuel, IdCard } from "lucide-react";
 import "./VehicleList.css";
 
 function VehicleItem({ vehicle, isAssigned, horizontal = false }) {
@@ -12,6 +12,10 @@ function VehicleItem({ vehicle, isAssigned, horizontal = false }) {
       isDragging: monitor.isDragging(),
     }),
   }));
+
+  const getTypeBadgeClass = (type) => {
+    return type === "LMV" ? "badge type lmv" : "badge type hmv";
+  };
 
   return (
     <div
@@ -36,7 +40,10 @@ function VehicleItem({ vehicle, isAssigned, horizontal = false }) {
 
           <div className="vehicle-info">
             <div className="info-row">
-              <span className="vehicle-type">{vehicle.type}</span>
+              <IdCard className="info-icon" />
+              <span className={getTypeBadgeClass(vehicle.type)}>
+                {vehicle.type}
+              </span>
             </div>
             <div className="info-row">
               <Fuel className="info-icon" />

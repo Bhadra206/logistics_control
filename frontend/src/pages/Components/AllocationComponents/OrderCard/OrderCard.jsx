@@ -1,13 +1,6 @@
 import React from "react";
 import { useDrop } from "react-dnd";
-import {
-  MapPin,
-  Calendar,
-  User,
-  Truck,
-  DollarSign,
-  Navigation,
-} from "lucide-react";
+import { MapPin, Calendar, Navigation, Users, Scale } from "lucide-react";
 import "./OrderCard.css";
 
 export function OrderCard({
@@ -76,10 +69,22 @@ export function OrderCard({
         <div className="detail-item">
           <Calendar className="detail-icon" />
           <span>
-            {order.numberOfDays} day
-            {order.numberOfDays !== 1 ? "s" : ""}
+            {order.numberOfDays} day{order.numberOfDays !== 1 ? "s" : ""}
           </span>
         </div>
+
+        {/* ✅ Passenger or Weight */}
+        {order.numPassengers ? (
+          <div className="detail-item">
+            <Users className="detail-icon" />
+            <span>{order.numPassengers} passengers</span>
+          </div>
+        ) : order.weight ? (
+          <div className="detail-item">
+            <Scale className="detail-icon" />
+            <span>{order.weight} Ton</span>
+          </div>
+        ) : null}
       </div>
 
       {/* Assignment Zones */}

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-import { User, DollarSign, Clock } from "lucide-react";
+import { User, DollarSign, Clock, IdCard } from "lucide-react";
 import "./DriverList.css";
 
 function DriverItem({ driver, isAssigned }) {
@@ -42,6 +42,12 @@ function DriverItem({ driver, isAssigned }) {
             <div className="info-row">
               <Clock className="info-icon" />
               <span>Overtime: ${driver.overTimeRate}</span>
+            </div>
+            <div className="info-row">
+              <IdCard className="info-icon" />
+              <span className={`licence ${driver.licence.toLowerCase()}`}>
+                {driver.licence} licence
+              </span>
             </div>
           </div>
         </div>
