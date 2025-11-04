@@ -85,13 +85,33 @@ function Vehicle() {
   const handleDeleteVehicle = async (id) => {
     if (!window.confirm("Are you sure you want to delete this vehicle?"))
       return;
+
     try {
-      await fetch(`http://localhost:3000/vehicle/deleteVehicle/${id}`, {
-        method: "DELETE",
-      });
-      fetchVehicles();
+      const res = await fetch(
+        `http://localhost:3000/vehicle/deleteVehicle/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        // ✅ Alert if vehicle is allocated to an active order
+        if (data.message?.includes("allocated")) {
+          alert(
+            "❌ Cannot delete vehicle. The vehicle is currently allocated to an active order."
+          );
+        } else {
+          alert(data.message || "Failed to delete vehicle ❌");
+        }
+      } else {
+        alert("✅ Vehicle deleted successfully");
+        fetchVehicles();
+      }
     } catch (err) {
-      console.error("Error deleting vehicle", err);
+      console.error("Error deleting vehicle:", err);
+      alert("An unexpected error occurred while deleting the vehicle.");
     }
   };
 

@@ -83,13 +83,33 @@ function Driver() {
 
   const handleDeleteDriver = async (id) => {
     if (!window.confirm("Are you sure you want to delete this driver?")) return;
+
     try {
-      await fetch(`http://localhost:3000/driver/deleteDriver/${id}`, {
-        method: "DELETE",
-      });
-      fetchDrivers();
+      const res = await fetch(
+        `http://localhost:3000/driver/deleteDriver/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        // ✅ Show alert if driver is allocated to an active order
+        if (data.message?.includes("allocated")) {
+          alert(
+            "❌ Cannot delete driver. The driver is currently allocated to an active order."
+          );
+        } else {
+          alert(data.message || "Failed to delete driver ❌");
+        }
+      } else {
+        alert("✅ Driver deleted successfully");
+        fetchDrivers();
+      }
     } catch (err) {
       console.error("Error deleting driver:", err);
+      alert("An unexpected error occurred while deleting the driver.");
     }
   };
 
