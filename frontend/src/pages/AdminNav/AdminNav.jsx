@@ -17,11 +17,15 @@ function AdminNav() {
         <h1>Logistics Control App</h1>
       </div>
       <div className="admin-right">
-        <Link to="/adminDashboard">DashBoard</Link>
-        <button onClick={handleLogout} className="admin-btn-outline">
-          <LogOut className="logout-icon" />
-          Logout
-        </button>
+        <div className="dashboard-logo">
+          <Link to="/adminDashboard">DashBoard</Link>
+        </div>
+        <div>
+          <button onClick={handleLogout} className="admin-btn-outline">
+            <LogOut className="logout-icon" />
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   );

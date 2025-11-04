@@ -23,6 +23,10 @@
   color: white;
 }
 
+.dashboard-logo {
+  margin-top: 10px;
+}
+
 .admin-right a:hover {
   color: rgb(180, 179, 179);
 }

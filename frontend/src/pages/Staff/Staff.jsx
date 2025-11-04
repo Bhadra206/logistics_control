@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { StaffList } from "../Components/StaffComponents/StaffList/StaffList";
 import { StaffForm } from "../Components/StaffComponents/StaffForm/StaffForm";
 import { useLocation } from "react-router-dom";
+import AdminNav from "../AdminNav/AdminNav";
 
 function Staff() {
   const location = useLocation();
@@ -101,6 +102,7 @@ function Staff() {
 
   return (
     <div className="staffContainer">
+      <AdminNav />
       {currentView === "list" && (
         <StaffList
           staffs={staffs}

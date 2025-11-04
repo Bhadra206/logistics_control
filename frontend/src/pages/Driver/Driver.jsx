@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { DriverList } from "../Components/DriverComponents/DriverList/DriverList";
 import { DriverForm } from "../Components/DriverComponents/DriverForm/DriverForm";
 import { useLocation } from "react-router-dom";
+import AdminNav from "../AdminNav/AdminNav";
 
 function Driver() {
   const location = useLocation();
@@ -138,6 +139,7 @@ function Driver() {
 
   return (
     <div className="driverContainer">
+      <AdminNav />
       {currentView === "list" && (
         <DriverList
           drivers={drivers}

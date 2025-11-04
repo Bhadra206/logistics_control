@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { VehicleList } from "../Components/VehicleComponents/VehicleList/VehicleList";
 import { VehicleForm } from "../Components/VehicleComponents/VehicleForm/VehicleForm";
 import { useLocation } from "react-router-dom";
+import AdminNav from "../AdminNav/AdminNav";
 
 function Vehicle() {
   const location = useLocation();
@@ -139,6 +140,7 @@ function Vehicle() {
 
   return (
     <div className="vehicleContainer">
+      <AdminNav/>
       {currentView === "list" && (
         <VehicleList
           vehicles={vehicles}
