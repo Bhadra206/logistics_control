@@ -5,15 +5,15 @@ export default function OrderList({ orders, onEdit, onDelete }) {
   const getStatusColor = (status) => {
     switch (status) {
       case "Pending":
-        return "status pending";
+        return "badge pending";
       case "In Progress":
-        return "status in-progress";
+        return "badge in-progress";
       case "Completed":
-        return "status completed";
+        return "badge completed";
       case "Cancelled":
-        return "status cancelled";
+        return "badge cancelled";
       default:
-        return "status default";
+        return "badge default";
     }
   };
 
@@ -23,77 +23,103 @@ export default function OrderList({ orders, onEdit, onDelete }) {
   };
 
   return (
-    <div className="order-list-container">
-      <table className="order-table">
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Customer Name</th>
-            <th>Start Location</th>
-            <th>Drop Location</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Service Type</th>
-            <th>Passengers / Weight</th>
-            <th>Distance</th>
-            <th>Status</th>
-            <th className="text-right">Actions</th>
-          </tr>
-        </thead>
+    <div className="order-card-container">
+      {orders.length === 0 ? (
+        <p className="no-data">No orders available</p>
+      ) : (
+        orders.map((order) => (
+          <div key={order._id} className="order-card">
+            {/* Header */}
+            <div className="order-card-header">
+              <div className="order-card-title">
+                <h3>{order.customerName}</h3>
+                <p className="order-id">#{order._id}</p>
+              </div>
+              <div className="order-card-actions">
+                <button
+                  className="btn edit"
+                  onClick={() => onEdit(order)}
+                  title="Edit"
+                >
+                  <Edit size={16} />
+                </button>
+                <button
+                  className="btn delete"
+                  onClick={() => onDelete(order._id)}
+                  title="Delete"
+                >
+                  <Trash2 size={16} />
+                </button>
+              </div>
+            </div>
 
-        <tbody>
-          {orders.length === 0 ? (
-            <tr>
-              <td colSpan="11" className="no-data">
-                No orders available
-              </td>
-            </tr>
-          ) : (
-            orders.map((order) => (
-              <tr key={order._id}>
-                <td className="bold">{order._id}</td>
-                <td>{order.customerName}</td>
-                <td>{order.startLoc}</td>
-                <td>{order.dropLoc}</td>
-                <td>{formatDate(order.startDate)}</td>
-                <td>{formatDate(order.endDate)}</td>
-                <td>
-                  <span className="badge">{order.typeOfService}</span>
-                </td>
-                <td>
-                  {order.typeOfService === "passenger"
+            {/* Body */}
+            <div className="order-card-body">
+              <p>
+                <strong>From:</strong> {order.startLoc || "-"}
+              </p>
+              <p>
+                <strong>To:</strong> {order.dropLoc || "-"}
+              </p>
+              <p>
+                <strong>Start Date:</strong> {formatDate(order.startDate)}
+              </p>
+              <p>
+                <strong>End Date:</strong> {formatDate(order.endDate)}
+              </p>
+              <p>
+                <strong>Service Type:</strong> {order.typeOfService}
+              </p>
+              {order.typeOfService === "passenger" && (
+                <p>
+                  <strong>Passengers:</strong>{" "}
+                  {order.numPassengers
                     ? `${order.numPassengers} Passengers`
-                    : `${order.weight} Ton`}
-                </td>
-                <td>{order.distance || "-"}</td>
-                <td>
-                  <span className={getStatusColor(order.status)}>
-                    {order.status}
-                  </span>
-                </td>
-                <td className="text-right">
-                  <div className="action-buttons">
-                    <button
-                      className="btn edit"
-                      onClick={() => onEdit(order)}
-                      title="Edit"
-                    >
-                      <Edit size={16} />
-                    </button>
-                    <button
-                      className="btn delete"
-                      onClick={() => onDelete(order._id)}
-                      title="Delete"
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+                    : "-"}
+                </p>
+              )}
+
+              {order.typeOfService === "goods" && order.weight != null && (
+                <p>
+                  <strong>Weight:</strong> {order.weight} Ton
+                </p>
+              )}
+
+              <p>
+                <strong>Distance:</strong> {order.distance || "-"}
+              </p>
+
+              {/* === Allocated Driver and Vehicle === */}
+              {order.driver?.name && (
+                <p>
+                  <strong>Driver:</strong> {order.driver.name}
+                </p>
+              )}
+              {order.vehicle?.name && (
+                <p>
+                  <strong>Vehicle:</strong> {order.vehicle.name}
+                </p>
+              )}
+              <p>
+                <strong>Total Cost:</strong> {order.TotalCost || "-"}
+              </p>
+              <p>
+                <strong>Overtime Hours:</strong> {order.overtimeHours || "-"}
+              </p>
+              <p>
+                <strong>Number Of days:</strong> {order.numberOfDays || "-"}
+              </p>
+            </div>
+
+            {/* Footer */}
+            <div className="order-card-footer">
+              <span className={getStatusColor(order.status)}>
+                {order.status}
+              </span>
+            </div>
+          </div>
+        ))
+      )}
     </div>
   );
 }

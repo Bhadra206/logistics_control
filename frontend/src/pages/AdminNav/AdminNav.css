@@ -23,6 +23,30 @@
   color: white;
 }
 
-.admin-right a:hover{
-    color: rgb(180, 179, 179);
+.admin-right a:hover {
+  color: rgb(180, 179, 179);
+}
+
+.logout-icon {
+  height: 16px;
+  width: 16px;
+  margin-right: 4px;
+}
+
+.admin-btn-outline {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: white;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-btn-outline:hover {
+  background-color: #b3b3b3;
+  border-color: #aaa;
 }

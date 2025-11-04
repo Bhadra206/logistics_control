@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./OrderForm.css";
 import { ArrowLeft } from "lucide-react";
 
@@ -20,12 +20,32 @@ export default function OrderForm({ order, onSave, onCancel }) {
     numPassengers: order?.numPassengers || "",
     weight: order?.weight || "",
     distance: order?.distance || "",
-    driver: order?.driver || "",
-    vehicle: order?.vehicle || "",
-    TotalCost: order?.TotalCost || "",
-    overtimeHours: order?.overtimeHours || "",
     status: order?.status || "Pending",
   });
+
+  useEffect(() => {
+    if (order) {
+      setFormData({
+        customerName: order.customerName || "",
+        customerEmail: order.customerEmail || "",
+        customerMobile: order.customerMobile || "",
+        placeOfCustomer: order.placeOfCustomer || "",
+        startLoc: order.startLoc || "Kochi",
+        dropLoc: order.dropLoc || "",
+        startDate: order.startDate
+          ? new Date(order.startDate).toISOString().split("T")[0]
+          : "",
+        endDate: order.endDate
+          ? new Date(order.endDate).toISOString().split("T")[0]
+          : "",
+        typeOfService: order.typeOfService || "passenger",
+        numPassengers: order.numPassengers || "",
+        weight: order.weight ?? "",
+        distance: order.distance || "",
+        status: order.status || "Pending",
+      });
+    }
+  }, [order]);
 
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -36,7 +56,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
 
     const formattedData = {
       ...formData,
-       _id: order?._id || formData._id,
+      _id: order?._id || formData._id,
       startDate: new Date(formData.startDate),
       endDate: new Date(formData.endDate),
       numPassengers:
@@ -44,17 +64,9 @@ export default function OrderForm({ order, onSave, onCancel }) {
           ? Number(formData.numPassengers)
           : undefined,
       weight:
-        formData.typeOfService === "goods"
-          ? Number(formData.weight)
-          : undefined,
+        formData.typeOfService === "goods" ? Number(formData.weight) : null,
       distance: Number(formData.distance),
-      TotalCost: formData.TotalCost ? Number(formData.TotalCost) : undefined,
-      overtimeHours: formData.overtimeHours
-        ? Number(formData.overtimeHours)
-        : undefined,
-      driver: formData.driver || undefined,
-      vehicle: formData.vehicle || undefined,
-      status: order?.id ? formData.status : "Pending",
+      status: order?._id ? formData.status : "Pending",
     };
 
     onSave(formattedData);
@@ -70,9 +82,12 @@ export default function OrderForm({ order, onSave, onCancel }) {
         </button>
         <div>
           <h2>{isEditing ? "Edit Order" : "Create New Order"}</h2>
-          <p>{order ? "Update order information" : "Enter Order details"}</p>
+          <p>
+            {isEditing ? "Update order information" : "Enter order details"}
+          </p>
         </div>
       </div>
+
       <form onSubmit={handleSubmit} className="order-form">
         {/* Customer Details */}
         <div className="order-form-row">
@@ -221,69 +236,6 @@ export default function OrderForm({ order, onSave, onCancel }) {
             />
           </div>
         </div>
-
-        {/* --- Show these fields only when editing --- */}
-        {isEditing && (
-          <>
-            <div className="order-form-row">
-              <div className="order-form-group">
-                <label>Driver</label>
-                <input
-                  type="text"
-                  value={formData.driver || ""}
-                  onChange={(e) => handleChange("driver", e.target.value)}
-                  readOnly
-                />
-              </div>
-              <div className="order-form-group">
-                <label>Vehicle</label>
-                <input
-                  type="text"
-                  value={formData.vehicle || ""}
-                  onChange={(e) => handleChange("vehicle", e.target.value)}
-                  readOnly
-                />
-              </div>
-            </div>
-
-            <div className="order-form-row">
-              <div className="order-form-group">
-                <label>Total Cost</label>
-                <input
-                  type="number"
-                  value={formData.TotalCost || ""}
-                  onChange={(e) => handleChange("TotalCost", e.target.value)}
-                  readOnly
-                />
-              </div>
-              <div className="order-form-group">
-                <label>Overtime Hours</label>
-                <input
-                  type="number"
-                  value={formData.overtimeHours || ""}
-                  onChange={(e) =>
-                    handleChange("overtimeHours", e.target.value)
-                  }
-                  readOnly
-                />
-              </div>
-            </div>
-
-            <div className="order-form-group">
-              <label>Status</label>
-              <select
-                value={formData.status}
-                onChange={(e) => handleChange("status", e.target.value)}
-              >
-                <option value="Pending">Pending</option>
-                <option value="Allocated">Allocated</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-                <option value="Cancelled">Cancelled</option>
-              </select>
-            </div>
-          </>
-        )}
 
         {/* Buttons */}
         <div className="button-group">

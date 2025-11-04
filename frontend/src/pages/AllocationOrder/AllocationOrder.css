@@ -4,7 +4,8 @@
   background: #f8fafc;
   display: flex;
   flex-direction: column;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
 }
 
 /* Top bar */
@@ -55,7 +56,7 @@
   color: #16a34a;
 }
 
-.stats {
+.order-stats {
   display: flex;
   gap: 8px;
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AdminNav.css";
+import { LogOut } from "lucide-react";
 
 function AdminNav() {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -17,7 +18,10 @@ function AdminNav() {
       </div>
       <div className="admin-right">
         <Link to="/adminDashboard">DashBoard</Link>
-        <button onClick={handleLogout}>Logout</button>
+        <button onClick={handleLogout} className="admin-btn-outline">
+          <LogOut className="logout-icon" />
+          Logout
+        </button>
       </div>
     </div>
   );

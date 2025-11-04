@@ -252,7 +252,7 @@ export default function AllocationOrder() {
                   Total Cost: ${calculateTotalCost().toFixed(2)}
                 </span>
               </div>
-              <div className="stats">
+              <div className="order-stats">
                 <span className="stat-badge">
                   {stats.drivers}/{drivers.length} Drivers
                 </span>

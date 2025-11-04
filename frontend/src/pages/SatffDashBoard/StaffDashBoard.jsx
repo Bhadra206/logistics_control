@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import OrderForm from "../Components/OrderComponents/OrderForm/OrderForm";
 import OrderList from "../Components/OrderComponents/OrderList/OrderList";
 import "./StaffDashBoard.css";
-import { Plus, Calendar, Search, Truck } from "lucide-react";
+import { Plus, Calendar, Search, Truck, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function StaffDashBoard() {
@@ -13,6 +13,7 @@ export default function StaffDashBoard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const navigate = useNavigate();
 
   // Fetch all orders on load (staff login)
@@ -67,10 +68,18 @@ export default function StaffDashBoard() {
           `http://localhost:3000/order/deleteOrder/${orderId}`,
           { method: "DELETE" }
         );
-        if (!res.ok) throw new Error("Failed to delete order");
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert(data.message || "Failed to delete order");
+          return;
+        }
+
         setOrders((prev) => prev.filter((order) => order._id !== orderId));
+        alert("Order deleted successfully ✅");
       } catch (err) {
-        alert(err.message);
+        alert("Error deleting order: " + err.message);
       }
     }
   };
@@ -80,9 +89,9 @@ export default function StaffDashBoard() {
       if (editingOrder) {
         console.log("Saving order:", order);
         const res = await fetch(
-          `http://localhost:3000/order/replaceOrder/${order._id}`,
+          `http://localhost:3000/order/updateOrderPartial/${order._id}`,
           {
-            method: "PUT",
+            method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(order),
           }
@@ -114,6 +123,12 @@ export default function StaffDashBoard() {
     await fetchOrders();
   };
 
+  function handleLogout() {
+    setToken(null);
+    localStorage.removeItem("token");
+    navigate("/");
+  }
+
   return (
     <div className="staffDashboard-container">
       {/* Header */}
@@ -133,6 +148,10 @@ export default function StaffDashBoard() {
             <button className="btn-primary" onClick={handleCreateOrder}>
               <Plus className="order-icon" />
               Create Order
+            </button>
+            <button className="btn-outline" onClick={handleLogout}>
+              <LogOut className="order-icon" />
+              Logout
             </button>
           </div>
         )}

@@ -1,90 +1,102 @@
-.order-list-container {
+.order-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin-top: 1rem;
-  overflow-x: auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 10px;
+}
+
+.order-card {
+  display: flex;
+  flex-direction: column;
   background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.order-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: sans-serif;
+.order-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Header */
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-card-title h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.order-id {
+  font-size: 12px;
+  color: #777;
+  margin-top: 2px;
+}
+
+/* Body */
+.order-card-body {
+  margin-top: 10px;
   font-size: 14px;
+  color: #444;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 4px 16px;
 }
 
-.order-table th,
-.order-table td {
-  padding: 10px 12px;
-  text-align: left;
-  border-bottom: 1px solid #e2e2e2;
+.order-card-body p {
+  margin: 2px 0;
 }
 
-.order-table th {
-  background-color: #f5f5f5;
-  font-weight: 600;
+/* Footer */
+.order-card-footer {
+  margin-top: 10px;
 }
 
-.order-table tr:hover {
-  background-color: #fafafa;
-}
-
-.order-table .bold {
-  font-weight: 600;
-}
-
-.no-data {
-  text-align: center;
-  padding: 16px;
-  color: #888;
-}
-
-/* === Badges === */
+/* Status Badges */
 .badge {
   display: inline-block;
-  padding: 4px 8px;
-  border-radius: 6px;
-  background-color: #e9ecef;
-  font-size: 12px;
-}
-
-/* === Status Colors === */
-.status {
-  padding: 4px 8px;
-  border-radius: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
   font-size: 12px;
   font-weight: 500;
 }
 
-.status.pending {
+.badge.pending {
   background-color: #fff3cd;
   color: #856404;
 }
 
-.status.in-progress {
+.badge.in-progress {
   background-color: #cce5ff;
   color: #004085;
 }
 
-.status.completed {
+.badge.completed {
   background-color: #d4edda;
   color: #155724;
 }
 
-.status.cancelled {
+.badge.cancelled {
   background-color: #f8d7da;
   color: #721c24;
 }
 
-.status.default {
+.badge.default {
   background-color: #e2e3e5;
   color: #383d41;
 }
 
-/* === Buttons === */
-.action-buttons {
+/* Buttons */
+.order-card-actions {
   display: flex;
-  justify-content: flex-end;
   gap: 6px;
 }
 
@@ -93,7 +105,7 @@
   background: none;
   cursor: pointer;
   padding: 6px;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: background 0.2s ease;
 }
 
@@ -103,4 +115,11 @@
 
 .btn.delete:hover {
   background-color: #ffe6e6;
+}
+
+.no-data {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+  margin-top: 20px;
 }
