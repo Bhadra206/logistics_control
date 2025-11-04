@@ -6,15 +6,17 @@ const mongoose = require("mongoose");
 //Get Order
 const getOrders = async (startDate) => {
   try {
-    let date = startDate ? new Date(startDate) : new Date();
+    let matchStage = {};
 
-    const startOfDay = new Date(date.setHours(0, 0, 0, 0));
-    const endOfDay = new Date(date.setHours(23, 59, 59, 999));
+    if (startDate) {
+      const date = new Date(startDate);
+      const startOfDay = new Date(date.setHours(0, 0, 0, 0));
+      const endOfDay = new Date(date.setHours(23, 59, 59, 999));
+      matchStage = { startDate: { $gte: startOfDay, $lte: endOfDay } };
+    }
 
     const orders = await Order.aggregate([
-      {
-        $match: { startDate: { $gte: startOfDay, $lte: endOfDay } },
-      },
+      { $match: matchStage },
       {
         $lookup: {
           from: "vehicles",
@@ -23,7 +25,7 @@ const getOrders = async (startDate) => {
           as: "vehicle",
         },
       },
-      { $unwind: "$vehicle" },
+      { $unwind: { path: "$vehicle", preserveNullAndEmptyArrays: true } },
       {
         $lookup: {
           from: "drivers",
@@ -32,11 +34,13 @@ const getOrders = async (startDate) => {
           as: "driver",
         },
       },
-      { $unwind: "$driver" },
+      { $unwind: { path: "$driver", preserveNullAndEmptyArrays: true } },
       {
         $project: {
           customerName: 1,
           customerMobile: 1,
+          customerEmail: 1,
+          placeOfCustomer: 1,
           startLoc: 1,
           dropLoc: 1,
           startDate: 1,
@@ -46,12 +50,14 @@ const getOrders = async (startDate) => {
           numberOfDays: 1,
           typeOfService: 1,
           numPassengers: 1,
+          weight: 1,
           distance: 1,
           TotalCost: 1,
           overtimeHours: 1,
           status: 1,
         },
       },
+      { $sort: { startDate: -1 } },
     ]);
 
     return orders;
@@ -63,7 +69,50 @@ const getOrders = async (startDate) => {
 
 //Get All Orders
 const getAllOrders = async () => {
-  const orders = await Order.find();
+  const orders = await Order.aggregate([
+    {
+      $lookup: {
+        from: "vehicles",
+        localField: "vehicle",
+        foreignField: "_id",
+        as: "vehicle",
+      },
+    },
+    { $unwind: { path: "$vehicle", preserveNullAndEmptyArrays: true } },
+    {
+      $lookup: {
+        from: "drivers",
+        localField: "driver",
+        foreignField: "_id",
+        as: "driver",
+      },
+    },
+    { $unwind: { path: "$driver", preserveNullAndEmptyArrays: true } },
+    {
+      $project: {
+        customerName: 1,
+        customerMobile: 1,
+        customerEmail: 1,
+        placeOfCustomer: 1,
+        startLoc: 1,
+        dropLoc: 1,
+        startDate: 1,
+        endDate: 1,
+        "vehicle.name": 1,
+        "driver.name": 1,
+        numberOfDays: 1,
+        typeOfService: 1,
+        numPassengers: 1,
+        weight: 1,
+        distance: 1,
+        TotalCost: 1,
+        overtimeHours: 1,
+        status: 1,
+      },
+    },
+    { $sort: { startDate: -1 } },
+  ]);
+
   return orders;
 };
 
@@ -113,23 +162,18 @@ const createOrder = async (orderData) => {
 };
 
 // Edit full Document
-const replaceOrder = async (req, res) => {
+const replaceOrder = async (id, orderData) => {
   try {
-    const { id } = req.params;
     const order = await Order.findById(id);
-    if (!order)
-      return res
-        .status(404)
-        .json({ success: false, message: "Order not found" });
+    if (!order) if (!order) throw new Error("Order not found");
 
-    const updatedOrder = await Order.findByIdAndUpdate(id, req.body, {
+    const updatedOrder = await Order.findByIdAndUpdate(id, orderData, {
       new: true,
-    }).populate("driver vehicle");
+    });
 
-    res.json({ success: true, data: updatedOrder });
+    return updatedOrder;
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
@@ -138,77 +182,70 @@ const updateOrderPartial = async (id, updateData) => {
   const order = await Order.findById(id);
   if (!order) throw new Error("Order not found");
 
-  const exceptionFields = [
+  const customerFields = [
     "customerName",
     "customerEmail",
     "customerMobile",
     "placeOfCustomer",
   ];
-  const fieldsToCheck = Object.keys(updateData).filter(
-    (f) => !["driver", "vehicle"].includes(f)
+
+  const allocationAffectingFields = [
+    "startDate",
+    "endDate",
+    "dropLoc",
+    "numberOfDays",
+    "numPassengers",
+    "weight",
+    "typeOfService",
+    "distance",
+  ];
+
+  const isOnlyCustomerUpdate = Object.keys(updateData).every((key) =>
+    customerFields.includes(key)
   );
-  const shouldTrigger = fieldsToCheck.some((f) => !exceptionFields.includes(f));
 
-  const update = { $set: {}, $unset: {} };
-  Object.assign(update.$set, updateData);
+  const affectsAllocation = Object.keys(updateData).some((key) =>
+    allocationAffectingFields.includes(key)
+  );
 
-  if (shouldTrigger) {
-    update.$set.status = "Pending";
-    update.$set.TotalCost = 0;
-    update.$unset.driver = "";
-    update.$unset.vehicle = "";
-    delete update.$set.driver;
-    delete update.$set.vehicle;
+  const update = { $set: updateData };
+
+  // 🔹 If allocation-affecting fields changed, unset driver/vehicle
+  if (affectsAllocation && !isOnlyCustomerUpdate) {
+    update.$unset = { driver: 1, vehicle: 1 };
+    update.$set.status = "Pending"; // reset to pending when allocation changes
   }
 
-  let driverExists, vehicleExists;
+  // 🔹 Always include total cost & status recalculation
+  const driver = await Driver.findById(updateData.driver || order.driver);
+  const vehicle = await Vehicle.findById(updateData.vehicle || order.vehicle);
 
-  if (updateData.driver) {
-    driverExists = await Driver.findById(updateData.driver);
-    if (!driverExists) throw new Error("Driver not found");
-    update.$set.driver = driverExists._id;
-  }
+  if (driver && vehicle) {
+    const distance = updateData.distance ?? order.distance ?? 0;
+    const daysOfService = updateData.numberOfDays ?? order.numberOfDays ?? 0;
 
-  if (updateData.vehicle) {
-    vehicleExists = await Vehicle.findById(updateData.vehicle);
-    if (!vehicleExists) throw new Error("Vehicle not found");
-    update.$set.vehicle = vehicleExists._id;
-  }
-
-  // Total cost calculation
-  if (update.$set.driver && update.$set.vehicle) {
-    update.$set.status = "Allocated";
-    delete update.$unset.driver;
-    delete update.$unset.vehicle;
-
-    const distance = order.distance || 0; // assuming `distance` is stored in order
-    const startDate = new Date(order.startDate);
-    const dropDate = new Date(order.endDate);
-
-    // Number of service days
-    const daysOfService = order.numberOfDays || 0;
-
-    // Overtime hours calculation
     let overtimeHours = Math.ceil((distance - daysOfService * 400) / 50);
     if (overtimeHours < 0) overtimeHours = 0;
 
-    // Vehicle cost
-    const perKmRate = vehicleExists?.ratePerKm || 0;
-    const vehicleCost = distance * perKmRate;
+    const vehicleCost = distance * (vehicle.ratePerKm || 0);
+    let driverCost = daysOfService * (driver.perDayRate || 0);
 
-    // Driver cost
-    const perDayRate = driverExists?.perDayRate || 0;
-    const overtimeRate = driverExists?.overTimeRate || 0;
-    const driverCost =
-      daysOfService * perDayRate + overtimeHours * overtimeRate;
+    if (overtimeHours > 0)
+      driverCost += overtimeHours * (driver.overTimeRate || 0);
 
     const totalCost = vehicleCost + driverCost;
 
-    update.$set.daysOfService = daysOfService;
-    update.$set.overtimeHours = overtimeHours;
-    update.$set.vehicleCost = vehicleCost;
-    update.$set.driverCost = driverCost;
-    update.$set.TotalCost = totalCost;
+    // ✅ If both driver and vehicle exist, mark as Allocated
+    Object.assign(update.$set, {
+      overtimeHours,
+      vehicleCost,
+      driverCost,
+      totalCost,
+      status: "Allocated",
+    });
+  } else if (!isOnlyCustomerUpdate && !update.$set.status) {
+    // If driver/vehicle missing and not just a customer edit
+    update.$set.status = "Pending";
   }
 
   const updatedOrder = await Order.findByIdAndUpdate(id, update, {

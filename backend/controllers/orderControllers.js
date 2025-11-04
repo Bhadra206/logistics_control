@@ -31,7 +31,7 @@ const getAllOrders = async (req, res) => {
 const getOrderByIdOrName = async (req, res) => {
   try {
     const { id, name } = req.query;
-    const order = await orderServices.getOrderByIdOrName({id, name});
+    const order = await orderServices.getOrderByIdOrName({ id, name });
     eventLogger.info("Successfully retrieved Orders by name or id ");
     res.status(201).json({ success: true, data: order });
   } catch (err) {
@@ -71,13 +71,15 @@ const replaceOrder = async (req, res) => {
 const updateOrderPartial = async (req, res) => {
   try {
     const { id } = req.params;
-    orderData = req.body;
+    const orderData = req.body;
+    console.log(req.body);
     const updatedOrder = await orderServices.updateOrderPartial(id, orderData);
     eventLogger.info("Specific field of Order has been updated successfully");
     res.status(200).json({ success: true, data: updatedOrder });
   } catch (err) {
     eventLogger.error("Error updating the partial order");
-    res.status(400).json({ success: false, message: err.message });
+    console.error("Error in updateOrderPartial:", err);
+    res.status(400).json({ error: err.message, stack: err.stack });
   }
 };
 

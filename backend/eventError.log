@@ -26,3 +26,135 @@
 {"level":"error","message":"Error updating the partial order","timestamp":"2025-09-24T08:23:10.594Z"}
 {"level":"error","message":"Failed to retrieved Orders by name or id ","timestamp":"2025-09-24T09:40:07.412Z"}
 {"level":"error","message":"Failed to retrieved Orders by name or id ","timestamp":"2025-09-24T09:41:04.414Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-08T06:49:20.010Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-08T06:49:20.768Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-08T06:49:20.942Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-08T06:49:21.158Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-08T06:51:17.155Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-08T06:52:34.711Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:07:21.219Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:07:22.619Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:08:14.052Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:08:14.684Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:08:19.873Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:32.122Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:32.606Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:32.779Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:32.965Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:33.183Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:35.341Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:35.504Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:35.659Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:35.831Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:36.012Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:36.173Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:36.333Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-14T05:11:36.553Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-14T05:14:03.989Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-14T05:14:17.612Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-14T05:14:18.069Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-14T05:14:18.231Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-14T05:14:18.394Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-14T05:14:18.574Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-14T05:14:18.762Z"}
+{"level":"error","message":"Error restoring driver","timestamp":"2025-10-14T05:14:18.993Z"}
+{"level":"error","message":"Error adding vehicle","timestamp":"2025-10-15T05:51:38.806Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-15T05:56:18.500Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-15T05:58:18.240Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-15T06:02:04.316Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-15T06:08:16.254Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-15T06:08:25.046Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-15T06:08:29.958Z"}
+{"level":"error","message":"Error deleting vehicle","timestamp":"2025-10-15T06:17:31.053Z"}
+{"level":"error","message":"Error deleting vehicle","timestamp":"2025-10-15T06:17:38.357Z"}
+{"level":"error","message":"Error restoring vehicle","timestamp":"2025-10-15T06:22:03.079Z"}
+{"level":"error","message":"Login Failed","timestamp":"2025-10-21T06:46:25.560Z"}
+{"level":"error","message":"Login Failed","timestamp":"2025-10-21T06:46:41.283Z"}
+{"level":"error","message":"Login Failed","timestamp":"2025-10-21T06:51:22.744Z"}
+{"level":"error","message":"Login Failed","timestamp":"2025-10-21T06:52:06.661Z"}
+{"level":"error","message":"Login Failed","timestamp":"2025-10-21T06:54:00.623Z"}
+{"level":"error","message":"Login Failed","timestamp":"2025-10-21T06:56:57.467Z"}
+{"level":"error","message":"Login Failed","timestamp":"2025-10-21T07:01:28.389Z"}
+{"level":"error","message":"Login Failed","timestamp":"2025-10-21T10:11:33.275Z"}
+{"level":"error","message":"Login Failed","timestamp":"2025-10-21T10:18:16.755Z"}
+{"level":"error","message":"Error creating Order","timestamp":"2025-10-22T05:49:18.438Z"}
+{"level":"error","message":"Error creating Order","timestamp":"2025-10-22T06:03:07.783Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:13.211Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:15.931Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:15.936Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:16.880Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:16.883Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:17.039Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:17.042Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:17.212Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:17.215Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:30.204Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:35.381Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:35.384Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:35.871Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:35.874Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:36.030Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:36.033Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:36.204Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:36.206Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:36.370Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:36.372Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:36.540Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:36.543Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:43.505Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:55:43.508Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:04.207Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:07.045Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:07.048Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:08.502Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:08.505Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:08.732Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:08.735Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:08.906Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:08.908Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:09.096Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:09.100Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:09.272Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:09.275Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:09.445Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:09.449Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:09.642Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:09.644Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:09.824Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:09.827Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:09.995Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:56:10.017Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:57:53.475Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:57:53.478Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:58:02.444Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T03:58:02.448Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T04:00:47.859Z"}
+{"level":"error","message":"Error fetching all Order","timestamp":"2025-10-23T04:00:47.863Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T05:15:38.874Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T05:15:46.489Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T05:17:34.729Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T05:17:44.450Z"}
+{"level":"error","message":"Error updating the full order","timestamp":"2025-10-28T05:26:03.744Z"}
+{"level":"error","message":"Error updating the full order","timestamp":"2025-10-28T05:26:09.292Z"}
+{"level":"error","message":"Error updating the full order","timestamp":"2025-10-28T05:26:21.955Z"}
+{"level":"error","message":"Error updating the full order","timestamp":"2025-10-28T05:26:27.244Z"}
+{"level":"error","message":"Error updating the full order","timestamp":"2025-10-28T05:29:20.737Z"}
+{"level":"error","message":"Error updating the full order","timestamp":"2025-10-28T05:32:23.553Z"}
+{"level":"error","message":"Error updating the full order","timestamp":"2025-10-28T05:38:39.287Z"}
+{"level":"error","message":"Error updating the full order","timestamp":"2025-10-28T05:38:52.110Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T07:34:25.313Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T07:35:02.696Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T07:36:31.616Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T07:42:12.989Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T08:26:47.591Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T08:37:33.215Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T08:37:52.709Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T08:43:46.643Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T08:44:27.773Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T08:47:10.652Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T08:47:32.554Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T08:52:17.538Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T08:56:34.817Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T09:04:21.375Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T09:05:05.916Z"}
+{"level":"error","message":"Error updating the partial order","timestamp":"2025-10-28T09:07:39.034Z"}

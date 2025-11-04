@@ -22,6 +22,23 @@ const updateStaff = async (staffId, updateData) => {
   }
 };
 
+const archiveStaff = async (staffId) => {
+  return await Staff.findByIdAndUpdate(
+    staffId,
+    { status: "Inactive" },
+    { new: true }
+  );
+};
+
+//Restore
+const restoreStaff = async (staffId) => {
+  return await Staff.findByIdAndUpdate(
+    staffId,
+    { status: "Active" },
+    { new: true }
+  );
+};
+
 const deleteStaff = async (staffId) => {
   try {
     const staff = await Staff.findByIdAndDelete(staffId);
@@ -32,4 +49,10 @@ const deleteStaff = async (staffId) => {
   }
 };
 
-module.exports = { getStaff, updateStaff, deleteStaff };
+module.exports = {
+  getStaff,
+  updateStaff,
+  archiveStaff,
+  restoreStaff,
+  deleteStaff,
+};

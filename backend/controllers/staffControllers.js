@@ -27,12 +27,53 @@ const updateStaff = async (req, res) => {
   }
 };
 
+const archiveStaff = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const staff = await staffServices.archiveStaff(id);
+
+    if (!staff) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Staff not found" });
+    }
+
+    eventLogger.info(`Staff ${id} archived successfully`);
+    res.status(200).json({ success: true, data: staff });
+  } catch (err) {
+    eventLogger.error("Error archiving staff");
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Restore
+const restoreStaff = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const staff = await staffServices.restoreStaff(id);
+
+    if (!staff) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Staff not found" });
+    }
+
+    eventLogger.info(`Staff ${id} restored successfully`);
+    res.status(200).json({ success: true, data: staff });
+  } catch (err) {
+    eventLogger.error("Error restoring staff");
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
 const deleteStaff = async (req, res) => {
   try {
     const { id } = req.params;
     await staffServices.deleteStaff(id);
     eventLogger.info(`Staff ${id} deleted successfully`);
-    res.status(200).json({ success: true, message: "Driver Deleted" });
+    res.status(200).json({ success: true, message: "Staff Deleted" });
   } catch (err) {
     console.log(err);
     eventLogger.error("Error deleting the staff");
@@ -40,4 +81,10 @@ const deleteStaff = async (req, res) => {
   }
 };
 
-module.exports = { getStaff, updateStaff, deleteStaff };
+module.exports = {
+  getStaff,
+  updateStaff,
+  archiveStaff,
+  restoreStaff,
+  deleteStaff,
+};

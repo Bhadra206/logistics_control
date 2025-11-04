@@ -23,7 +23,7 @@ const orderSchema = new mongoose.Schema(
     distance: { type: Number, required: true },
     driver: { type: Types.ObjectId, ref: "Driver", required: false },
     vehicle: { type: Types.ObjectId, ref: "Vehicle", required: false },
-    TotalCost: { type: Number, required: false },
+    totalCost: { type: Number, required: false },
     overtimeHours: { type: Number, required: false },
     status: {
       type: String,

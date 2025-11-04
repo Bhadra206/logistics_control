@@ -7,11 +7,21 @@ const vehicle = require("./routes/Vehicles");
 const driver = require("./routes/Drivers");
 const login = require("./routes/Login");
 const staff = require("./routes/Staff");
+const cors = require("cors");
+const crons = require("./Jobs/OrderStatusCron")
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
+  })
+);
 
 app.use("/admin", admin);
 app.use("/order", order);

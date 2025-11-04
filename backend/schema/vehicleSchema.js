@@ -7,7 +7,7 @@ const vehicleSchema = new mongoose.Schema(
     registrationNo: { type: String, required: true },
     purpose: {
       type: String,
-      enum: ["passenger", "goods"],
+      enum: ["passenger", "goods", "Both"],
       default: "passenger",
       required: true,
     },

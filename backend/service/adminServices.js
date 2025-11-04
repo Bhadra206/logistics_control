@@ -7,11 +7,11 @@ const Staff = require("../schema/staffSchema");
 const getDashBoardStats = async () => {
   try {
     const activeDrivers = await Driver.countDocuments({ status: "Active" });
-    const activeVehicle = await Vehicle.countDocuments({ status: "Active" });
-    const allocatedOrder = await Order.countDocuments({ status: "Allocated" });
-    const pendingOrder = await Order.countDocuments({ status: "Pending" });
+    const activeVehicles = await Vehicle.countDocuments({ status: "Active" });
+    const allocatedOrders = await Order.countDocuments({ status: "Allocated" });
+    const pendingOrders = await Order.countDocuments({ status: "Pending" });
 
-    return { activeDrivers, activeVehicle, allocatedOrder, pendingOrder };
+    return { activeDrivers, activeVehicles, allocatedOrders, pendingOrders };
   } catch (err) {
     console.log(err);
     throw err;

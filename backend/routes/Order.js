@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const orderController = require("../controllers/orderControllers");
 
-router.get("/getOrder", orderController.getOrders);
+router.get("/getOrders", orderController.getOrders);
 router.get("/getAllOrders", orderController.getAllOrders);
 router.get("/getOrderByIdOrName", orderController.getOrderByIdOrName);
 router.post("/createOrder", orderController.createOrder);
