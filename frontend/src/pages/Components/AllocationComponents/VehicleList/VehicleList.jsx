@@ -74,7 +74,6 @@ export function VehicleList({
             <VehicleItem
               key={vehicle._id}
               vehicle={vehicle}
-              isAssigned={assignedVehicleIds.includes(vehicle._id)}
               horizontal={horizontal}
             />
           ))

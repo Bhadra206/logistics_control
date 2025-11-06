@@ -169,44 +169,49 @@ export default function AllocationOrder() {
       return;
     }
 
+    let conflicts = [];
+
     for (let i = 0; i < allocatedOrders.length; i++) {
-      const current = allocatedOrders[i];
+      const orderA = allocatedOrders[i];
+      const startA = new Date(orderA.startDate);
+      const endA = new Date(orderA.endDate);
 
-      const conflicts = orders.filter((other) => {
-        if (other._id === current._id) return false;
-        const sameDate =
-          new Date(other.startDate).toISOString().split("T")[0] ===
-          new Date(current.startDate).toISOString().split("T")[0];
+      for (let j = i + 1; j < allocatedOrders.length; j++) {
+        const orderB = allocatedOrders[j];
+        const startB = new Date(orderB.startDate);
+        const endB = new Date(orderB.endDate);
 
-        const driverConflict =
-          sameDate &&
-          other.assignedDriverId &&
-          other.assignedDriverId === current.assignedDriverId;
+        // --- Helper: checks overlap between two date ranges ---
+        const overlap = startA <= endB && endA >= startB;
 
-        const vehicleConflict =
-          sameDate &&
-          other.assignedVehicleId &&
-          other.assignedVehicleId === current.assignedVehicleId;
+        // --- Driver conflict check ---
+        if (overlap && orderA.assignedDriverId === orderB.assignedDriverId) {
+          conflicts.push(
+            `Driver conflict: ${
+              orderA.driverName || orderA.assignedDriverId
+            } assigned to overlapping orders (${orderA.startDate}–${
+              orderA.endDate
+            }) and (${orderB.startDate}–${orderB.endDate})`
+          );
+        }
 
-        return driverConflict || vehicleConflict;
-      });
-
-      if (conflicts.length > 0) {
-        const conflict = conflicts[0];
-        const driverConflict =
-          conflict.assignedDriverId === current.assignedDriverId;
-        const vehicleConflict =
-          conflict.assignedVehicleId === current.assignedVehicleId;
-
-        let message = "";
-        if (driverConflict)
-          message += `❌ Driver already assigned to another order on ${current.startDate}\n`;
-        if (vehicleConflict)
-          message += `❌ Vehicle already assigned to another order on ${current.startDate}\n`;
-
-        alert(message.trim());
-        return;
+        // --- Vehicle conflict check ---
+        if (overlap && orderA.assignedVehicleId === orderB.assignedVehicleId) {
+          conflicts.push(
+            `Vehicle conflict: ${
+              orderA.vehicleName || orderA.assignedVehicleId
+            } assigned to overlapping orders (${orderA.startDate}–${
+              orderA.endDate
+            }) and (${orderB.startDate}–${orderB.endDate})`
+          );
+        }
       }
+    }
+
+    // ✅ If conflicts found → show alert and stop save
+    if (conflicts.length > 0) {
+      alert("Conflicts found:\n\n" + conflicts.join("\n"));
+      return;
     }
 
     try {
@@ -225,9 +230,18 @@ export default function AllocationOrder() {
             }),
           }
         );
-        const data = await res.json();
-        if (!data.success) {
-          console.error(`Failed to save order ${order._id}`, data.message);
+        let data;
+        try {
+          data = await res.json();
+        } catch {
+          data = { message: "Invalid JSON response from server" };
+        }
+
+        if (!res.ok) {
+          alert(
+            `Error: ${data.message || "Failed to save order " + order._id}`
+          );
+          return;
         }
       }
       alert("Allocations saved successfully!");

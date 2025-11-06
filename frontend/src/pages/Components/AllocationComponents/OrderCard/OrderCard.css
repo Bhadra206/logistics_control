@@ -27,6 +27,33 @@
   flex: 1;
 }
 
+.order-name-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #374151; /* gray-700 */
+}
+
+.order-customer {
+  font-weight: 500;
+}
+
+.order-date {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #4b5563; /* gray-600 */
+  font-size: 0.875rem;
+}
+
+.order-date-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #2563eb; /* blue-600 */
+}
+
 .order-title {
   font-size: 1.125rem;
   font-weight: 600;

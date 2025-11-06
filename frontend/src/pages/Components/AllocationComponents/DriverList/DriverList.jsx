@@ -61,11 +61,7 @@ export function DriverList({ drivers = [], assignedDriverIds = [] }) {
     <div className="driver-list">
       <div className="driver-hint">Drag drivers to assign them to orders</div>
       {drivers.map((driver) => (
-        <DriverItem
-          key={driver._id}
-          driver={driver}
-          isAssigned={assignedDriverIds.includes(driver._id)}
-        />
+        <DriverItem key={driver._id} driver={driver} />
       ))}
     </div>
   );

@@ -86,7 +86,7 @@ export default function OrderList({ orders, onEdit, onDelete }) {
               )}
 
               <p>
-                <strong>Distance:</strong> {order.distance || "-"}
+                <strong>Distance:</strong> {order.distance || "-"} km
               </p>
 
               {/* === Allocated Driver and Vehicle === */}
@@ -101,10 +101,10 @@ export default function OrderList({ orders, onEdit, onDelete }) {
                 </p>
               )}
               <p>
-                <strong>Total Cost:</strong> {order.totalCost || "-"}
+                <strong>Total Cost:</strong> {order.totalCost || "0"}
               </p>
               <p>
-                <strong>Overtime Hours:</strong> {order.overtimeHours || "-"}
+                <strong>Overtime Hours:</strong> {order.overtimeHours || "0"}
               </p>
               <p>
                 <strong>Number Of days:</strong> {order.numberOfDays || "-"}

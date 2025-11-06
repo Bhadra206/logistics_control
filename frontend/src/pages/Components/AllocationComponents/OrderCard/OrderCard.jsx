@@ -48,8 +48,22 @@ export function OrderCard({
       <div className="order-header">
         <div className="order-header-left">
           <h3 className="order-title">{order._id}</h3>
-          <p className="order-customer">{order.customerName}</p>
+
+          <div className="order-name-date">
+            <p className="order-customer">{order.customerName}</p>
+            <div className="order-date">
+              <Calendar className="order-date-icon" />
+              <span>
+                {new Date(order.startDate).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </span>
+            </div>
+          </div>
         </div>
+
         <div className="order-header-right">
           <div className="order-cost">${totalCost.toFixed(2)}</div>
           {isFullyAssigned && <span className="complete-badge">Complete</span>}

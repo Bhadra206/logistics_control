@@ -74,6 +74,11 @@ export default function OrderForm({ order, onSave, onCancel }) {
 
   const isEditing = !!order?._id;
 
+  const isEditable =
+    !isEditing ||
+    formData.status === "Pending" ||
+    formData.status === "Allocated";
+
   return (
     <div className="order-form-container">
       <div className="order-form-header">
@@ -98,6 +103,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
               value={formData.customerName}
               onChange={(e) => handleChange("customerName", e.target.value)}
               required
+              disabled={!isEditable}
             />
           </div>
           <div className="order-form-group">
@@ -107,6 +113,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
               value={formData.customerEmail}
               onChange={(e) => handleChange("customerEmail", e.target.value)}
               required
+              disabled={!isEditable}
             />
           </div>
         </div>
@@ -119,6 +126,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
               value={formData.customerMobile}
               onChange={(e) => handleChange("customerMobile", e.target.value)}
               required
+              disabled={!isEditable}
             />
           </div>
 
@@ -129,6 +137,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
               value={formData.placeOfCustomer}
               onChange={(e) => handleChange("placeOfCustomer", e.target.value)}
               required
+              disabled={!isEditable}
             />
           </div>
         </div>
@@ -142,6 +151,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
               value={formData.startLoc}
               onChange={(e) => handleChange("startLoc", e.target.value)}
               required
+              disabled={!isEditable}
             />
           </div>
           <div className="order-form-group">
@@ -151,6 +161,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
               value={formData.dropLoc}
               onChange={(e) => handleChange("dropLoc", e.target.value)}
               required
+              disabled={!isEditable}
             />
           </div>
         </div>
@@ -164,6 +175,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
               value={formData.startDate}
               onChange={(e) => handleChange("startDate", e.target.value)}
               required
+              disabled={!isEditable}
             />
           </div>
           <div className="order-form-group">
@@ -173,6 +185,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
               value={formData.endDate}
               onChange={(e) => handleChange("endDate", e.target.value)}
               required
+              disabled={!isEditable}
             />
           </div>
         </div>
@@ -187,6 +200,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
                 value="passenger"
                 checked={formData.typeOfService === "passenger"}
                 onChange={(e) => handleChange("typeOfService", e.target.value)}
+                disabled={!isEditable}
               />
               Passenger
             </label>
@@ -196,6 +210,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
                 value="goods"
                 checked={formData.typeOfService === "goods"}
                 onChange={(e) => handleChange("typeOfService", e.target.value)}
+                disabled={!isEditable}
               />
               Goods
             </label>
@@ -211,6 +226,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
                 value={formData.numPassengers}
                 onChange={(e) => handleChange("numPassengers", e.target.value)}
                 required
+                disabled={!isEditable}
               />
             </div>
           )}
@@ -222,6 +238,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
                 value={formData.weight}
                 onChange={(e) => handleChange("weight", e.target.value)}
                 required
+                disabled={!isEditable}
               />
             </div>
           )}
@@ -233,6 +250,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
               value={formData.distance}
               onChange={(e) => handleChange("distance", e.target.value)}
               required
+              disabled={!isEditable}
             />
           </div>
         </div>
@@ -242,7 +260,7 @@ export default function OrderForm({ order, onSave, onCancel }) {
           <button type="button" className="btn cancel" onClick={onCancel}>
             Cancel
           </button>
-          <button type="submit" className="btn save">
+          <button type="submit" className="btn save" disabled={!isEditable}>
             {isEditing ? "Update Order" : "Create Order"}
           </button>
         </div>

@@ -86,8 +86,8 @@ export default function StaffDashBoard() {
 
   const handleSaveOrder = async (order) => {
     try {
+      let message = "";
       if (editingOrder) {
-        console.log("Saving order:", order);
         const res = await fetch(
           `http://localhost:3000/order/updateOrderPartial/${order._id}`,
           {
@@ -98,6 +98,7 @@ export default function StaffDashBoard() {
         );
         if (!res.ok) throw new Error("Failed to update order");
         await res.json();
+        message = "Order Updated Successfully ✅";
       } else {
         const res = await fetch("http://localhost:3000/order/createOrder", {
           method: "POST",
@@ -106,12 +107,13 @@ export default function StaffDashBoard() {
         });
         if (!res.ok) throw new Error("Failed to create order");
         await res.json();
+        message = "Order created Successfully ✅";
       }
       await fetchOrders();
 
       setCurrentView("list");
       setEditingOrder(null);
-      alert("Order updated successfully ✅");
+      alert(message);
     } catch (err) {
       alert(err.message);
     }
