@@ -165,17 +165,121 @@ const createOrder = async (orderData) => {
 const replaceOrder = async (id, orderData) => {
   try {
     const order = await Order.findById(id);
-    if (!order) if (!order) throw new Error("Order not found");
+    if (!order) throw new Error("Order not found");
 
-    console.log("Update Data:", orderData);
+    // Use correct IDs (handle both driver / vehicle)
+    const driverId = orderData.driver || orderData.driverId;
+    const vehicleId = orderData.vehicle || orderData.vehicleId;
 
-    const updatedOrder = await Order.findByIdAndUpdate(id, orderData, {
-      new: true,
-    });
+    const startDate = orderData.startDate || order.startDate;
+    const endDate = orderData.endDate || order.endDate;
+    const typeOfService = orderData.typeOfService || order.typeOfService;
+
+    const newStart = new Date(startDate);
+    const newEnd = new Date(endDate);
+
+    // ========================
+    // ✅ DRIVER VALIDATION
+    // ========================
+    if (driverId) {
+      const driver = await Driver.findById(driverId);
+      if (!driver) throw new Error("Driver not found");
+
+      // Check overlap with other saved orders (date conflict)
+      const existingDriverConflict = await Order.findOne({
+        _id: { $ne: id },
+        driver: driverId,
+        status: { $in: ["Allocated", "In Progress"] },
+        startDate: { $lte: newEnd },
+        endDate: { $gte: newStart },
+      });
+
+      if (existingDriverConflict) {
+        throw new Error(
+          `Driver ${driver.name} already assigned between ${new Date(
+            existingDriverConflict.startDate
+          ).toLocaleDateString()} and ${new Date(
+            existingDriverConflict.endDate
+          ).toLocaleDateString()}`
+        );
+      }
+
+      // Licence check
+      if (typeOfService === "goods" && driver.licence !== "HMV") {
+        throw new Error("Only HMV licensed drivers can handle goods orders");
+      }
+
+      if (
+        typeOfService === "passenger" &&
+        !["LMV", "HMV"].includes(driver.licence)
+      ) {
+        throw new Error(
+          "Only LMV or HMV licensed drivers can handle passenger orders"
+        );
+      }
+
+      if (typeOfService === "both" && driver.licence !== "HMV") {
+        throw new Error(
+          "Only HMV licensed drivers can handle both-type orders"
+        );
+      }
+    }
+
+    // ========================
+    // ✅ VEHICLE VALIDATION
+    // ========================
+    if (vehicleId) {
+      const vehicle = await Vehicle.findById(vehicleId);
+      if (!vehicle) throw new Error("Vehicle not found");
+
+      // Check overlap with other saved orders (date conflict)
+      const existingVehicleConflict = await Order.findOne({
+        _id: { $ne: id },
+        vehicle: vehicleId,
+        status: { $in: ["Allocated", "In Progress"] },
+        startDate: { $lte: newEnd },
+        endDate: { $gte: newStart },
+      });
+
+      if (existingVehicleConflict) {
+        throw new Error(
+          `Vehicle ${vehicle.name} already assigned between ${new Date(
+            existingVehicleConflict.startDate
+          ).toLocaleDateString()} and ${new Date(
+            existingVehicleConflict.endDate
+          ).toLocaleDateString()}`
+        );
+      }
+
+      // Vehicle type validation
+      if (typeOfService === "goods" && vehicle.type !== "HMV") {
+        throw new Error("Only HMV vehicles can be used for goods orders");
+      }
+
+      if (typeOfService === "passenger" && vehicle.type !== "LMV") {
+        throw new Error("Only LMV vehicles can be used for passenger orders");
+      }
+
+      if (typeOfService === "both" && vehicle.type !== "HMV") {
+        throw new Error("Only HMV vehicles can be used for both-type orders");
+      }
+    }
+
+    // ✅ Update order if everything passes
+    const updatedOrder = await Order.findByIdAndUpdate(
+      id,
+      {
+        ...orderData,
+        driver: driverId,
+        vehicle: vehicleId,
+      },
+      { new: true }
+    ).populate("driver vehicle");
 
     return updatedOrder;
   } catch (err) {
-    console.error(err);
+    console.error("Replace order error:", err.message);
+    throw err;
   }
 };
 
